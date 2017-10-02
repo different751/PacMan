@@ -1,0 +1,25 @@
+__________COMPLETED__________
+**1** : Make git repo/starting files
+
+
+__________TO BE COMPLETED__________
+2 : Make first few sprites for game
+3 : Make first level window
+4 : Make player move/collisions
+5 : Make AI move
+6 : Splash Screen
+7 : Ghost States
+8 : Second level
+9 : Music/Sound effects
+10 : High Score system
+11 : place dots
+12 : bonus fruit
+
+
+
+__________Optional Features_________
+OF 1 : different AI personalities
+OF 2 : add thrid level
+OF 3 : add fourth level
+OF 4 : intermission Cut scenes
+
