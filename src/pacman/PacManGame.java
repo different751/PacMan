@@ -18,6 +18,9 @@ public class PacManGame extends StateBasedGame {
 	//public static final int GAMEOVERSTATE = 5;
 	//public static final int LEVEL1 = 1;
 	
+	public static final String MAZE_MAZE_RSC = "PacMan/resource/pacmaze.png";
+	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
+	
 	
 
 
@@ -54,7 +57,7 @@ public class PacManGame extends StateBasedGame {
 	@Override
 	public void initStatesList(GameContainer container) throws SlickException {
 	
-		//addState(new StartUpState());
+		addState(new StartUpState());
 		
 		
 		
@@ -64,6 +67,9 @@ public class PacManGame extends StateBasedGame {
 		// and (2) because loading it will load the audio libraries and
 		// unless that is done now, we can't *disable* sound as we
 		// attempt to do in the startUp() method.
+		
+		ResourceManager.loadImage(MAZE_MAZE_RSC);
+		ResourceManager.loadImage(PACMAN_PACMAN_RSC);
 	
 		
 			
