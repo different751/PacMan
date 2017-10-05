@@ -1,10 +1,11 @@
 __________COMPLETED__________
 **1** : Make git repo/starting files
+**2** : Make first few sprites for game
 
 
 __________TO BE COMPLETED__________
-2 : Make first few sprites for game
-3 : Make first level window
+
+3 : Make start state level window
 4 : Make player move/collisions
 5 : Make AI move
 6 : Splash Screen
@@ -14,6 +15,7 @@ __________TO BE COMPLETED__________
 10 : High Score system
 11 : place dots
 12 : bonus fruit
+13 : first level
 
 
 
