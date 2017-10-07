@@ -13,8 +13,9 @@ import org.newdawn.slick.state.transition.HorizontalSplitTransition;
 
 
 
-class StartUpState extends BasicGameState {
 
+class StartUpState extends BasicGameState {
+	PacManGame pg;
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
@@ -23,6 +24,8 @@ class StartUpState extends BasicGameState {
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
+		
+		
 		
 		
 		container.setSoundOn(false);
@@ -36,7 +39,11 @@ class StartUpState extends BasicGameState {
 		
 		//PacManGame bg = (PacManGame)game;
 		g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),
-				0, 48);		
+				0, 48);	
+		
+		
+		
+
 		
 		//g.drawImage(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC),
 				//224, 313);	
@@ -50,7 +57,9 @@ class StartUpState extends BasicGameState {
 		PacManGame bg = (PacManGame)game;
 		
 		
-		
+		if(input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)){
+			game.enterState(PacManGame.LEVEL1, new EmptyTransition(), new HorizontalSplitTransition() );
+		}
 		
 		
 		//bg.ball.update(delta);
