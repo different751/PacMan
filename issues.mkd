@@ -3,6 +3,7 @@ __________COMPLETED__________
 **2** : Make first few sprites for game
 **3** : make start state level window
 **11** : place dots
+**13** : first level/make player move
 
 
 __________TO BE COMPLETED__________
@@ -15,7 +16,12 @@ __________TO BE COMPLETED__________
 9 : Music/Sound effects
 10 : High Score system
 12 : bonus fruit
-13 : first level/make player move
+
+14 : teleport pac man around map
+15 : win state
+16 : game over state
+17 : splash state
+18 : tweak player movement
 
 
 
