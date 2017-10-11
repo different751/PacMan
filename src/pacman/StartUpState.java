@@ -54,7 +54,7 @@ class StartUpState extends BasicGameState {
 			int delta) throws SlickException {
 
 		Input input = container.getInput();
-		PacManGame bg = (PacManGame)game;
+		PacManGame pg = (PacManGame)game;
 		
 		
 		if(input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)){

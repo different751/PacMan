@@ -22,6 +22,7 @@ public class PacManGame extends StateBasedGame {
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
 	public static final String DOT_DOT_RSC = "PacMan/resource/pacdot.png";
 	public static final String ENR_ENR_RSC = "PacMan/resource/pacenergy.png";
+	//public static final String 
 	
 	
 
@@ -29,6 +30,8 @@ public class PacManGame extends StateBasedGame {
 	public final int ScreenWidth;
 	public final int ScreenHeight;
 	public final int Screen4;
+	private int dotcheck=0;
+	private int enrdotcheck=0;
 	//public PacManObj pacman;
 	//public dots food[];
 	
@@ -58,7 +61,7 @@ public class PacManGame extends StateBasedGame {
 			{1,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
 			{1,0,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,0,1},
-			{1,2,0,0,1,1,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,1,1,0,0,2,1},
+			{1,2,0,0,1,1,0,0,0,0,0,0,0,7,7,0,0,0,0,0,0,0,1,1,0,0,2,1},
 			{1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
 			{1,1,1,0,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,0,1,1,1},
 			{1,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,1},
@@ -69,7 +72,9 @@ public class PacManGame extends StateBasedGame {
 	};
 	
 	
-	 
+	PacManObj pacman;
+	//Energydot enrdot[];
+	//dots dot[];
 
 
 	
@@ -118,6 +123,9 @@ public class PacManGame extends StateBasedGame {
 		
 		//food=new dots[244];
 		
+		pacman = new PacManObj(232,424,0,0);
+		//enrdot=new Energydot[4];
+		//dot=new dots[241];
 		
 		
 	
