@@ -53,9 +53,13 @@ public class level1 extends BasicGameState {
 	int check;
 	int countdown=500;
 	int otherflag=0;
-	int timer=0;
+	int timer=18000;
 	int desired=0;
 	int current=0;
+	int inkyflag=0;
+	int pinkyflag=0;
+	int clydeflag=0;
+	
 	
 
 	
@@ -140,6 +144,11 @@ public class level1 extends BasicGameState {
 		//pg.pacman.addAnimation(pg.pacman.PacManAni);
 		//pg.pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false);
 		pg.pacman.render(g);
+		pg.blinky.render(g);
+		pg.inky.render(g);
+		pg.pinky.render(g);
+		pg.clyde.render(g);
+		
 		
 	}
 
@@ -161,6 +170,12 @@ public class level1 extends BasicGameState {
 		tileright=currenttilex+1;
 		tileleft=currenttilex;
 		
+		if(mazex==pg.blinky.getblinkmazex() || mazex==pg.pinky.getPinkymazex() || mazex==pg.inky.getInkymazex() || mazex==pg.clyde.getPinkymazex()){
+			if(mazey==pg.blinky.getblinkmazey() || mazey==pg.pinky.getPinkymazey() || mazey==pg.inky.getInkymazey() || mazey==pg.clyde.getPinkymazey()){
+				System.out.println("GAME OVER");
+			}
+		}
+		
 		
 		if(input.isKeyPressed(Input.KEY_T) ){
 			System.out.println(currenttilex +","+ currenttiley + " Maze element: "+ pg.maze[currenttiley][currenttilex]);
@@ -175,6 +190,7 @@ public class level1 extends BasicGameState {
 		
 	
 		if(state==0){
+			
 		//if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) || key==1)  ){
 		if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) )  ){
 			desired=1;
@@ -295,6 +311,7 @@ public class level1 extends BasicGameState {
 			
 		}*/
 		//}
+			
 		}
 		
 		if(state==1){
@@ -357,11 +374,39 @@ public class level1 extends BasicGameState {
 		//pacman.PacManAni.update(delta);
 		//pg.pacman.update(delta);
 		
+		pg.blinky.choice(mazex, mazey, pg);
 		
+		timer -=delta;
+		if(timer<12000){
+			pg.inky.movefromhome(pg);
+			inkyflag=1;
+		}
 		
+		if(inkyflag==1){
+			//System.out.println("CHOICE");
+			pg.inky.choice(mazex, mazey, pg);
+		}
+		
+		if(timer<6000){
+			pg.pinky.movefromhome(pg);
+			pinkyflag=1;
+		}
+		
+		if(pinkyflag==1){
+			pg.pinky.choice(mazex, mazey, pg);
+		}
+		
+		if(timer < 0){
+			pg.clyde.movefromhome(pg);
+			clydeflag=1;
+		}
+		
+		if(clydeflag==1){
+			pg.clyde.choice(mazex, mazey, pg);
+		}
 		
 		//bg.ball.update(delta);
-
+		
 		
 
 	}
@@ -439,6 +484,8 @@ public class level1 extends BasicGameState {
 		}
 		return;
 	}
+	
+
 
 	@Override
 	public int getID() {

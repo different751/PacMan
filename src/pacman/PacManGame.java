@@ -22,6 +22,18 @@ public class PacManGame extends StateBasedGame {
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
 	public static final String DOT_DOT_RSC = "PacMan/resource/pacdot.png";
 	public static final String ENR_ENR_RSC = "PacMan/resource/pacenergy.png";
+	public static final String BL_BL_RSC = "PacMan/resource/blinkyleft.png";
+	public static final String BU_BU_RSC = "PacMan/resource/blinkyup.png";
+	public static final String BD_BD_RSC = "PacMan/resource/blinkydown.png";
+	public static final String IL_IL_RSC = "PacMan/resource/inkyleft.png";
+	public static final String IU_IU_RSC = "PacMan/resource/inkyup.png";
+	public static final String ID_ID_RSC = "PacMan/resource/inkydown.png";
+	public static final String PL_PL_RSC = "PacMan/resource/pinkyleft.png";
+	public static final String PU_PU_RSC = "PacMan/resource/pinkyup.png";
+	public static final String PD_PD_RSC = "PacMan/resource/pinkydown.png";
+	public static final String CL_CL_RSC = "PacMan/resource/clydeleft.png";
+	public static final String CU_CU_RSC = "PacMan/resource/clydeup.png";
+	public static final String CD_CD_RSC = "PacMan/resource/clydedown.png";
 	//public static final String 
 	
 	
@@ -50,7 +62,7 @@ public class PacManGame extends StateBasedGame {
 			{1,1,1,1,1,1,0,1,1,1,1,1,3,1,1,3,1,1,1,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,1,1,1,3,1,1,3,1,1,1,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,3,3,3,3,3,3,3,3,3,3,1,1,0,1,1,1,1,1,1},
-			{1,1,1,1,1,1,0,1,1,3,1,1,1,4,4,1,1,1,3,1,1,0,1,1,1,1,1,1},
+			{1,1,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,3,1,3,3,3,3,3,3,1,3,1,1,0,1,1,1,1,1,1},
 			{3,3,3,3,3,3,0,3,3,3,1,3,3,3,3,3,3,1,3,3,3,0,3,3,3,3,3,3},//midpoint
 			{1,1,1,1,1,1,0,1,1,3,1,3,3,3,3,3,3,1,3,1,1,0,1,1,1,1,1,1},
@@ -73,6 +85,10 @@ public class PacManGame extends StateBasedGame {
 	
 	
 	PacManObj pacman;
+	Blinky blinky;
+	Inky inky;
+	Pinky pinky;
+	Clyde clyde;
 	//Energydot enrdot[];
 	//dots dot[];
 
@@ -120,10 +136,26 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(PACMAN_PACMAN_RSC);
 		ResourceManager.loadImage(DOT_DOT_RSC);
 		ResourceManager.loadImage(ENR_ENR_RSC);
+		ResourceManager.loadImage(BL_BL_RSC);
+		ResourceManager.loadImage(BU_BU_RSC);
+		ResourceManager.loadImage(BD_BD_RSC);
+		ResourceManager.loadImage(IL_IL_RSC);
+		ResourceManager.loadImage(IU_IU_RSC);
+		ResourceManager.loadImage(ID_ID_RSC);
+		ResourceManager.loadImage(PL_PL_RSC);
+		ResourceManager.loadImage(PU_PU_RSC);
+		ResourceManager.loadImage(PD_PD_RSC);
+		ResourceManager.loadImage(CL_CL_RSC);
+		ResourceManager.loadImage(CU_CU_RSC);
+		ResourceManager.loadImage(CD_CD_RSC);
 		
 		//food=new dots[244];
 		
 		pacman = new PacManObj(232,424,0,0);
+		blinky = new Blinky(232,232);
+		inky = new Inky(192,280);
+		pinky = new Pinky(224,280);
+		clyde = new Clyde(256,280);
 		//enrdot=new Energydot[4];
 		//dot=new dots[241];
 		
