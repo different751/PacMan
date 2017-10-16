@@ -4,12 +4,12 @@ __________COMPLETED__________
 **3** : make start state level window
 **11** : place dots
 **13** : first level/make player move
-
+**5** : Make AI move
 
 __________TO BE COMPLETED__________
 
 
-5 : Make AI move
+
 6 : Splash Screen
 7 : Ghost States
 8 : Second level
@@ -17,11 +17,12 @@ __________TO BE COMPLETED__________
 10 : High Score system
 12 : bonus fruit
 
-14 : teleport pac man around map
+14 : teleport pac man and ghost around map
 15 : win state
 16 : game over state
 17 : splash state
 18 : tweak player movement
+19 : tweak AI movement
 
 
 
