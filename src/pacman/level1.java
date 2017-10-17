@@ -19,16 +19,11 @@ import org.newdawn.slick.tiled.TiledMap;
 
 
 public class level1 extends BasicGameState {
-	//private Animation PacManAni;
-	//PacManObj pacman = new PacManObj();
-	//loadImage(PacManGame.DOT_DOT_RSC);
+
 	
 	PacManGame pg;
-	//PacManObj pacman = new PacManObj();
 	dots food = new dots();
 	Energydot enrdot = new Energydot();
-	//int pacx=232;
-	//int pacy=424;
 	float pacx=232;
 	float pacy=424;
 	int tileheight=16;
@@ -59,19 +54,16 @@ public class level1 extends BasicGameState {
 	int inkyflag=0;
 	int pinkyflag=0;
 	int clydeflag=0;
-	
-	
-
-	
-	
 	int state=0;
+	int scaredtimer=0;
+	int scaredflag=0;
+	int mazescared=0;
 	//use render instead
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
 		
-		//PacManAni = new Animation(ResourceManager.getSpriteSheet(PacManGame.PACMAN_PACMAN_RSC, 28, 28),75);
 	}
 	
 	@Override
@@ -79,7 +71,9 @@ public class level1 extends BasicGameState {
 		pg = (PacManGame)game;
 		 currenttilex=(int) ((pg.pacman.getX()-8)/16);
 		 currenttiley=(int) ((pg.pacman.getY()-56)/16);
-		container.setSoundOn(false);
+		container.setSoundOn(true);
+		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
+		//ResourceManager.getSound(PacManGame.Waka_Waka_RSC).loop();
 		
 	}
 
@@ -90,49 +84,26 @@ public class level1 extends BasicGameState {
 		
 		
 		
-		//PacManGame bg = (PacManGame)game;
+		
 		
 		g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),0, 48);	
-		//g.drawImage(ResourceManager.getImage(PacManGame.DOT_DOT_RSC),200,200);
-		
-		
-		//g.drawImage(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC), map.
-		
-		//g.drawImage(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC),224, 313);	]
-		//pacman.PacManAni.draw(224,313);
-		
-		//pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false).drawCentered(pacx, pacy);
-		//pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false).drawCentered(224,517);
-		/*if(state==0){
-			pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false).drawCentered(pacx, pacy);
-		}
-		
-		if(state==1){
-			for(int i=1;i<17;i++){
-				pacx--;
-				pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false).drawCentered(pacx, pacy);
-			}
-			//pacx=pacx-8;
-			state=0;
-			
-		}*/
+	
 		
 		
 		
 		for(int i=0;i<31;i++){
 			for(int z=0;z<28;z++){
 				if(pg.maze[i][z]==0){
-					//g.drawImage(ResourceManager.getImage(PacManGame.DOT_DOT_RSC), (z * 16) +6,(i*16)+52);
+					
 					food.dotani.getCurrentFrame().drawCentered((z * 16) +8,(i*16)+56);
-					//food.dotani.getCurrentFrame().drawCentered((z * 16),(i*16)+48);
-					//food.dotani.getCurrentFrame().drawCentered((z * 16),(i*16));
+					
 					
 				}
 				
 				if(pg.maze[i][z]==2){
-					//g.drawImage(ResourceManager.getImage(PacManGame.ENR_ENR_RSC), (z * 16) +6,(i*16)+52);
+					
 					enrdot.enrani.getCurrentFrame().drawCentered((z * 16) +8,(i*16)+56);
-					//pg.enrdot.render(g);
+					
 				}
 				
 			}
@@ -141,8 +112,7 @@ public class level1 extends BasicGameState {
 		
 		
 		
-		//pg.pacman.addAnimation(pg.pacman.PacManAni);
-		//pg.pacman.PacManAni.getCurrentFrame().getFlippedCopy(true, false);
+		
 		pg.pacman.render(g);
 		pg.blinky.render(g);
 		pg.inky.render(g);
@@ -158,10 +128,9 @@ public class level1 extends BasicGameState {
 
 		Input input = container.getInput();
 		PacManGame pg = (PacManGame)game;
-		//System.out.println(pg.maze[13][22]);
+		
 			
-		//previousx=currenttilex*16;
-		//previousy=currenttiley*16;
+		
 		currenttilex=(int) (((pg.pacman.getX())-8)/16);
 		currenttiley=(int) ((pg.pacman.getY()-56)/16);
 		
@@ -200,28 +169,9 @@ public class level1 extends BasicGameState {
 		else if(key==1){
 			this.move(desired);
 		}
-			/*
-			nexttile=currenttiley;
-			//System.out.println("W:  Current X:" + (currenttilex) +","+ "Current Y: " + (currenttiley));
-			//System.out.println("W  Nexttile for Y: " + nexttile);
-			//System.out.println("WHAT IS IN ARRARY: " + pg.maze[nexttile][currenttilex]);
-			//test for collision
 			
-			if(pg.maze[mazey-1][mazex]!=1){
-				state=3;
-				nextmazex=mazex;
-				nextmazey=mazey-1;
-				key=1;
-				check=10;
-			}
-			else{
-				key=0;
-			}
-			*/
 			
-		//}
-
-		//if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN) || key==2) ){
+		
 		if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN) ) ){
 			desired=2;
 			System.out.println("S");
@@ -230,26 +180,9 @@ public class level1 extends BasicGameState {
 		else if(key==2){
 			this.move(desired);
 		}
-			/*
-			nexttile=currenttiley+1;
-			//System.out.println("S:  Current X:" + (currenttilex) +","+ "Current Y: " + (currenttiley));
-			//System.out.println("S  Nexttile for Y: " + nexttile);
-			//System.out.println("WHAT IS IN ARRARY: " + pg.maze[nexttile][currenttilex]);
 			
-			if(pg.maze[mazey+1][mazex]!=1){
-				state=4;
-				nextmazex=mazex;
-				nextmazey=mazey+1;
-				key=2;
-				check=10;
-			}
-			else{
-				key=0;
-			}*/
-			
-		//}
 
-		//if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) || key==3)  ){
+		
 		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) )  ){
 			desired=3;
 			System.out.println("A");
@@ -260,29 +193,7 @@ public class level1 extends BasicGameState {
 			//System.out.println("A");
 			this.move(desired);
 		}
-			/*
-			
-			//System.out.println("A:  Current X:" + (mazex) +","+ "Current Y: " + (mazey));
-			
-			//System.out.println("A  Nexttile for x: " + (mazex-1));
-			//System.out.println("WHAT IS IN ARRARY: " + pg.maze[currenttiley][nexttile]);
-			
-			
-			if(pg.maze[mazey][mazex-1]!=1){
-				state=1;
-				nextmazex=mazex-1;
-				nextmazey=mazey;
-				key=3;
-				check=10;
-				
-			}
-			else{
-				key=0;
-			}
-			*/
-		//}
-
-		//if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT) || key==4) ){
+		
 		if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)) ){
 			desired=4;
 			System.out.println("D");
@@ -291,26 +202,7 @@ public class level1 extends BasicGameState {
 		else if(key==4){
 			this.move(desired);
 		}
-			/*
-			nexttile=currenttilex+1;
-			//System.out.println("D:  Current X:" + (currenttilex) +","+ "Current Y: " + (currenttiley));
 			
-			//System.out.println("D  Nexttile for x: " + nexttile);
-			//System.out.println("WHAT IS IN ARRARY: " + pg.maze[currenttiley][nexttile]);
-			if(pg.maze[mazey][mazex+1]!=1){
-				state=2;
-				nextmazex=mazex+1;
-				nextmazey=mazey;
-				key=4;
-				check=10;
-			}
-			else{
-				key=0;
-			}
-			
-			
-		}*/
-		//}
 			
 		}
 		
@@ -320,9 +212,30 @@ public class level1 extends BasicGameState {
 				pacx-=1.6;
 				check-=1;
 				pg.pacman.setX(pacx);
+				pg.maze[mazey][mazex]=-1;
+				if(check==0 && mazescared == 0){
+					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						
+					}
+				}
+				else if(check==0 && mazescared==2){
+						
+						scaredflag=1;
+						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
+							
+							System.out.println("HELP");
+						
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+							
+						}
+						scaredtimer=4000;
+				}
+				
 			}
 			else{
-				pg.maze[mazey][mazex]=-1;
 				state=0;
 				mazex=nextmazex;
 			}
@@ -334,9 +247,29 @@ public class level1 extends BasicGameState {
 				pacx+=1.6;
 				check-=1;
 				pg.pacman.setX(pacx);
+				pg.maze[mazey][mazex]=-1;
+				if(check==0 && mazescared == 0){
+					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						
+					}
+				}
+				else if(check == 0 && mazescared == 2){
+						
+						scaredflag=1;
+							ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
+							
+							//System.out.println("HELP");
+						
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+							
+						}
+						scaredtimer=4000;
+				}
 			}
 			else{
-				pg.maze[mazey][mazex]=-1;
 				state=0;
 				mazex=nextmazex;
 			}
@@ -346,9 +279,28 @@ public class level1 extends BasicGameState {
 				pacy-=1.6;
 				check-=1;
 				pg.pacman.setY(pacy);
+				pg.maze[mazey][mazex]=-1;
+				if(check==0 && mazescared==0){
+					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						
+					}
+				}
+				else if(check==0 && mazescared==2){
+						
+						scaredflag=1;
+						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
+							
+							//System.out.println("HELP");
+					
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+							}
+						scaredtimer=4000;
+				}
 			}
 			else{
-				pg.maze[mazey][mazex]=-1;
 				state=0;
 				mazey=nextmazey;
 			}
@@ -359,20 +311,41 @@ public class level1 extends BasicGameState {
 				pacy+=1.6;
 				check-=1;
 				pg.pacman.setY(pacy);
+				pg.maze[mazey][mazex]=-1;
+				if(check==0 && mazescared==0){
+					
+					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						
+					}
+				}
+				else if(check==0 && mazescared==2){
+						
+						scaredflag=1;
+						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
+							
+							//System.out.println("HELP");
+						
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+							
+						}
+						scaredtimer=4000;
+				}
 			}
 			else{
-				pg.maze[mazey][mazex]=-1;
 				state=0;
 				mazey=nextmazey;
 			}
+			
+			
 		}
 		
 		
 		
 		
 		
-		//pacman.PacManAni.update(delta);
-		//pg.pacman.update(delta);
 		
 		pg.blinky.choice(mazex, mazey, pg);
 		
@@ -383,7 +356,6 @@ public class level1 extends BasicGameState {
 		}
 		
 		if(inkyflag==1){
-			//System.out.println("CHOICE");
 			pg.inky.choice(mazex, mazey, pg);
 		}
 		
@@ -405,9 +377,16 @@ public class level1 extends BasicGameState {
 			pg.clyde.choice(mazex, mazey, pg);
 		}
 		
-		//bg.ball.update(delta);
 		
-		
+		scaredtimer-=delta;
+		System.out.println(scaredtimer + "," +scaredflag);
+		if(scaredtimer<0 && scaredflag==1){
+			ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
+			ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
+			scaredflag=0;
+			//mazescared=0;
+			
+		}
 
 	}
 	
@@ -417,6 +396,7 @@ public class level1 extends BasicGameState {
 		if(desired==3){
 			if(pg.maze[mazey][mazex-1]!=1){
 				state=1;
+				mazescared = pg.maze[mazey][mazex-1];
 				nextmazex=mazex-1;
 				nextmazey=mazey;
 				key=3;
@@ -434,6 +414,7 @@ public class level1 extends BasicGameState {
 		if(desired==1){
 			if(pg.maze[mazey-1][mazex]!=1){
 				state=3;
+				mazescared = pg.maze[mazey-1][mazex];
 				nextmazex=mazex;
 				nextmazey=mazey-1;
 				key=1;
@@ -452,6 +433,7 @@ public class level1 extends BasicGameState {
 		if(desired==2){
 			if(pg.maze[mazey+1][mazex]!=1){
 				state=4;
+				mazescared = pg.maze[mazey+1][mazex];
 				nextmazex=mazex;
 				nextmazey=mazey+1;
 				key=2;
@@ -469,6 +451,7 @@ public class level1 extends BasicGameState {
 		if(desired==4){
 			if(pg.maze[mazey][mazex+1]!=1){
 				state=2;
+				mazescared = pg.maze[mazey][mazex+1];
 				nextmazex=mazex+1;
 				nextmazey=mazey;
 				key=4;
