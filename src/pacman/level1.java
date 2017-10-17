@@ -18,6 +18,8 @@ import org.newdawn.slick.tiled.TiledMap;
 
 
 
+
+
 public class level1 extends BasicGameState {
 
 	
@@ -58,6 +60,7 @@ public class level1 extends BasicGameState {
 	int scaredtimer=0;
 	int scaredflag=0;
 	int mazescared=0;
+	int winstate=244;
 	//use render instead
 
 	@Override
@@ -213,11 +216,13 @@ public class level1 extends BasicGameState {
 				check-=1;
 				pg.pacman.setX(pacx);
 				pg.maze[mazey][mazex]=-1;
+				
 				if(check==0 && mazescared == 0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
+					winstate--;
 				}
 				else if(check==0 && mazescared==2){
 						
@@ -232,6 +237,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
+						winstate--;
 				}
 				
 			}
@@ -248,11 +254,13 @@ public class level1 extends BasicGameState {
 				check-=1;
 				pg.pacman.setX(pacx);
 				pg.maze[mazey][mazex]=-1;
+				
 				if(check==0 && mazescared == 0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
+					winstate--;
 				}
 				else if(check == 0 && mazescared == 2){
 						
@@ -267,6 +275,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
+						winstate--;
 				}
 			}
 			else{
@@ -280,11 +289,13 @@ public class level1 extends BasicGameState {
 				check-=1;
 				pg.pacman.setY(pacy);
 				pg.maze[mazey][mazex]=-1;
+				
 				if(check==0 && mazescared==0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
+					winstate--;
 				}
 				else if(check==0 && mazescared==2){
 						
@@ -298,6 +309,7 @@ public class level1 extends BasicGameState {
 							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 							}
 						scaredtimer=4000;
+						winstate--;
 				}
 			}
 			else{
@@ -312,12 +324,14 @@ public class level1 extends BasicGameState {
 				check-=1;
 				pg.pacman.setY(pacy);
 				pg.maze[mazey][mazex]=-1;
+				
 				if(check==0 && mazescared==0){
 					
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
+					winstate--;
 				}
 				else if(check==0 && mazescared==2){
 						
@@ -332,6 +346,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
+						winstate--;
 				}
 			}
 			else{
@@ -379,13 +394,19 @@ public class level1 extends BasicGameState {
 		
 		
 		scaredtimer-=delta;
-		System.out.println(scaredtimer + "," +scaredflag);
+		//System.out.println(scaredtimer + "," +scaredflag);
 		if(scaredtimer<0 && scaredflag==1){
 			ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
 			ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
 			scaredflag=0;
 			//mazescared=0;
 			
+		}
+		
+		if(winstate==0){
+			pg.winx=pacx;
+			pg.winy=pacy;
+			this.winstate();
 		}
 
 	}
@@ -466,6 +487,10 @@ public class level1 extends BasicGameState {
 			return;
 		}
 		return;
+	}
+	
+	public void winstate(){
+		pg.enterState(PacManGame.WINSTATE);
 	}
 	
 
