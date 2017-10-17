@@ -17,6 +17,7 @@ public class PacManGame extends StateBasedGame {
 	//public static final int PLAYINGSTATE = 4;
 	//public static final int GAMEOVERSTATE = 5;
 	public static final int LEVEL1 = 1;
+	public static final int WINSTATE = 2;
 	
 	public static final String MAZE_MAZE_RSC = "PacMan/resource/pacmaze.png";
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
@@ -38,6 +39,7 @@ public class PacManGame extends StateBasedGame {
 	public static final String Scared_Scared_RSC = "PacMan/resource/scared.wav";
 	public static final String Siren_Siren_RSC = "PacMan/resource/test1.wav";
 	public static final String Waka_Waka_RSC = "PacMan/resource/test2.wav";
+	public static final String Win_Win_RSC = "PacMan/resource/pacwinmaze.png";
 	//public static final String 
 	
 	
@@ -93,6 +95,8 @@ public class PacManGame extends StateBasedGame {
 	Inky inky;
 	Pinky pinky;
 	Clyde clyde;
+	float winx;
+	float winy;
 	//Energydot enrdot[];
 	//dots dot[];
 
@@ -126,6 +130,7 @@ public class PacManGame extends StateBasedGame {
 	
 		//addState(new StartUpState());
 		addState(new level1());
+		addState(new Winstate());
 		
 		
 		
@@ -137,6 +142,7 @@ public class PacManGame extends StateBasedGame {
 		// attempt to do in the startUp() method.
 		
 		ResourceManager.loadImage(MAZE_MAZE_RSC);
+		ResourceManager.loadImage(Win_Win_RSC);
 		ResourceManager.loadImage(PACMAN_PACMAN_RSC);
 		ResourceManager.loadImage(DOT_DOT_RSC);
 		ResourceManager.loadImage(ENR_ENR_RSC);
