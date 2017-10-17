@@ -61,6 +61,10 @@ public class level1 extends BasicGameState {
 	int scaredflag=0;
 	int mazescared=0;
 	int winstate=244;
+	int fruittiley=17;
+	int fruittilex=14;
+	int fruittimer=25000;
+	int fruit=0;
 	//use render instead
 
 	@Override
@@ -106,6 +110,21 @@ public class level1 extends BasicGameState {
 				if(pg.maze[i][z]==2){
 					
 					enrdot.enrani.getCurrentFrame().drawCentered((z * 16) +8,(i*16)+56);
+					
+				}
+				
+				if(pg.maze[i][z]==8){
+					if(fruit==0){
+						g.drawImage(ResourceManager.getImage(PacManGame.CH_CH_RSC),(z * 16) +8,(i*16)+50);
+					}
+					else if(fruit==1){
+						g.drawImage(ResourceManager.getImage(PacManGame.PE_PE_RSC),(z * 16) +8,(i*16)+50);
+					}
+					else if(fruit==2){
+						g.drawImage(ResourceManager.getImage(PacManGame.ST_ST_RSC),(z * 16) +8,(i*16)+50);
+					}
+					
+					
 					
 				}
 				
@@ -407,6 +426,21 @@ public class level1 extends BasicGameState {
 			pg.winx=pacx;
 			pg.winy=pacy;
 			this.winstate();
+		}
+		
+		fruittimer-=delta;
+		if(fruittimer<0){
+			if(pg.maze[fruittiley][fruittilex]==3){
+				pg.maze[fruittiley][fruittilex]=8;
+				fruittimer=10000;
+			}else{
+				pg.maze[fruittiley][fruittilex]=3;
+				fruit++;
+				if(fruit==3)
+					fruit=0;
+				
+				fruittimer=25000;
+			}
 		}
 
 	}

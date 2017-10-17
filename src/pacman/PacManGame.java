@@ -40,6 +40,9 @@ public class PacManGame extends StateBasedGame {
 	public static final String Siren_Siren_RSC = "PacMan/resource/test1.wav";
 	public static final String Waka_Waka_RSC = "PacMan/resource/test2.wav";
 	public static final String Win_Win_RSC = "PacMan/resource/pacwinmaze.png";
+	public static final String CH_CH_RSC = "PacMan/resource/cherry.png";
+	public static final String PE_PE_RSC = "PacMan/resource/peach.png";
+	public static final String ST_ST_RSC = "PacMan/resource/Strawberry.png";
 	//public static final String 
 	
 	
@@ -162,6 +165,9 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadSound(Scared_Scared_RSC);
 		ResourceManager.loadSound(Siren_Siren_RSC);
 		ResourceManager.loadSound(Waka_Waka_RSC);
+		ResourceManager.loadImage(ST_ST_RSC);
+		ResourceManager.loadImage(CH_CH_RSC);
+		ResourceManager.loadImage(PE_PE_RSC);
 		
 		//food=new dots[244];
 		

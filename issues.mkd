@@ -6,6 +6,8 @@ __________COMPLETED__________
 **13** : first level/make player move
 **5** : Make AI move
 **9** : Music/Sound effects
+**15** : win state
+**12** : bonus fruit
 __________TO BE COMPLETED__________
 
 
@@ -15,19 +17,21 @@ __________TO BE COMPLETED__________
 8 : Second level
 
 10 : High Score system
-12 : bonus fruit
+
 
 14 : teleport pac man and ghost around map
-15 : win state
+
 16 : game over state
 18 : tweak player movement
 19 : tweak AI movement
+20 : title screen
+21 : cheat codes
 
 
 
 __________Optional Features_________
 OF 1 : different AI personalities
-OF 2 : add thrid level
+OF 2 : add third level
 OF 3 : add fourth level
 OF 4 : intermission Cut scenes
 
