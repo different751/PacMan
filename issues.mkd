@@ -16,18 +16,22 @@ __________TO BE COMPLETED__________
 7 : Ghost States
 8 : Second level
 
-10 : High Score system
+10 : High Score system/game over state
 
 
 14 : teleport pac man and ghost around map
 
-16 : game over state
+
 18 : tweak player movement
 19 : tweak AI movement
 20 : title screen
 21 : cheat codes
+22 : draw lives
 
 
+__________Minor Random Ideas_______
+MRI 1 : add score text after fruit eat
+MRI 2 : Need to reset i on PacMan
 
 __________Optional Features_________
 OF 1 : different AI personalities
