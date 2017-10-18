@@ -10,6 +10,7 @@ __________COMPLETED__________
 **12** : bonus fruit
 **22** : draw lives
 **10** : High Score system/game over state
+**14** : teleport pac man around map
 
 __________TO BE COMPLETED__________
 
@@ -18,7 +19,6 @@ __________TO BE COMPLETED__________
 6 : Splash Screen
 7 : Ghost States
 8 : Second level
-14 : teleport pac man and ghost around map
 18 : tweak player movement
 19 : tweak AI movement
 20 : title screen
