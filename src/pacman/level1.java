@@ -65,6 +65,8 @@ public class level1 extends BasicGameState {
 	int fruittilex=14;
 	int fruittimer=25000;
 	int fruit=0;
+	int secondcheck=-1;
+	int wrapflag=0;
 	//use render instead
 
 	@Override
@@ -282,8 +284,8 @@ public class level1 extends BasicGameState {
 		tileright=currenttilex+1;
 		tileleft=currenttilex;
 		
-		if(mazex==pg.blinky.getblinkmazex() || mazex==pg.pinky.getPinkymazex() || mazex==pg.inky.getInkymazex() || mazex==pg.clyde.getPinkymazex()){
-			if(mazey==pg.blinky.getblinkmazey() || mazey==pg.pinky.getPinkymazey() || mazey==pg.inky.getInkymazey() || mazey==pg.clyde.getPinkymazey()){
+		if(mazex==pg.blinky.getblinkmazex()){
+			if(mazey==pg.blinky.getblinkmazey() ){
 				pg.winx=pacx;
 				pg.winy=pacy;
 				pg.lives--;
@@ -520,6 +522,68 @@ public class level1 extends BasicGameState {
 			
 		}
 		
+		if(state==5){
+			if(check>0){
+				System.out.println("HERE");
+				pacx+=1.6;
+				check-=1;
+				pg.pacman.setX(pacx);
+				mazex=2;
+				mazey=14;
+			}
+			else if(check<=0 && wrapflag ==0){
+				System.out.println("HERE2");
+				pg.pacman.setX(0);
+				pacx=0;
+				secondcheck=25;
+				wrapflag=1;
+			}
+			
+			if(secondcheck>0){
+				System.out.println("HERE3");
+				pacx+=1.6;
+				secondcheck-=1;
+				pg.pacman.setX(pacx);
+			}
+			else if(secondcheck<=0 && wrapflag==1){
+				mazex=2;
+				mazey=14;
+				state=0;
+			}
+			
+		}
+		if(state==6){
+			if(check>0){
+				System.out.println("HERE");
+				pacx-=1.6;
+				check-=1;
+				pg.pacman.setX(pacx);
+				mazex=25;
+				mazey=14;
+			}
+			else if(check<=0 && wrapflag ==0){
+				System.out.println("HERE2");
+				pg.pacman.setX(0);
+				pacx=448;
+				secondcheck=25;
+				wrapflag=1;
+			}
+			
+			if(secondcheck>0){
+				System.out.println("HERE3");
+				pacx-=1.6;
+				secondcheck-=1;
+				pg.pacman.setX(pacx);
+			}
+			else if(secondcheck<=0 && wrapflag==1){
+				mazex=25;
+				mazey=14;
+				state=0;
+			}
+		}
+		
+		
+		
 		
 		
 		
@@ -529,30 +593,30 @@ public class level1 extends BasicGameState {
 		
 		timer -=delta;
 		if(timer<12000){
-			pg.inky.movefromhome(pg);
+			//pg.inky.movefromhome(pg);
 			inkyflag=1;
 		}
 		
 		if(inkyflag==1){
-			pg.inky.choice(mazex, mazey, pg);
+			//pg.inky.choice(mazex, mazey, pg);
 		}
 		
 		if(timer<6000){
-			pg.pinky.movefromhome(pg);
+			//pg.pinky.movefromhome(pg);
 			pinkyflag=1;
 		}
 		
 		if(pinkyflag==1){
-			pg.pinky.choice(mazex, mazey, pg);
+			//pg.pinky.choice(mazex, mazey, pg);
 		}
 		
 		if(timer < 0){
-			pg.clyde.movefromhome(pg);
+			//pg.clyde.movefromhome(pg);
 			clydeflag=1;
 		}
 		
 		if(clydeflag==1){
-			pg.clyde.choice(mazex, mazey, pg);
+			//pg.clyde.choice(mazex, mazey, pg);
 		}
 		
 		
@@ -593,6 +657,12 @@ public class level1 extends BasicGameState {
 				
 		
 		if(desired==3){
+			if(pg.maze[mazey][mazex]==6){
+				state=6;
+				check=20;
+				wrapflag=0;
+				return;
+			}
 			if(pg.maze[mazey][mazex-1]!=1){
 				state=1;
 				mazescared = pg.maze[mazey][mazex-1];
@@ -648,6 +718,13 @@ public class level1 extends BasicGameState {
 		}
 		
 		if(desired==4){
+			if(pg.maze[mazey][mazex]==5){
+				System.out.println("MADE IT");
+				state=5;
+				check=20;
+				wrapflag=0;
+				return;
+			}
 			if(pg.maze[mazey][mazex+1]!=1){
 				state=2;
 				mazescared = pg.maze[mazey][mazex+1];
