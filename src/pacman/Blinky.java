@@ -20,20 +20,20 @@ import org.newdawn.slick.Animation;
  */
 class Blinky extends Entity {
 	public Animation Blinkani;
-	private int countdown;
-	private int state=0;
-	private Vector velocity;
-	private int nexttile;
-	private int currenttilex=14;
-	private int currenttiley=11;
-	private int nexttilex=0;
-	private int nexttiley=0;
-	private int check=0;
-	private float blinkx=232;
-	private float blinky=232;
-	private int desired=0;
-	private int current=0;
-	private int key=0;
+	public int countdown;
+	public int state=0;
+	public Vector velocity;
+	public int nexttile;
+	public int currenttilex=14;
+	public int currenttiley=11;
+	public int nexttilex=0;
+	public int nexttiley=0;
+	public int check=0;
+	public float blinkx=232;
+	public float blinky=232;
+	public int desired=0;
+	public int current=0;
+	public int key=0;
 
 	public Blinky(final float x, final float y) {
 		super(x,y);

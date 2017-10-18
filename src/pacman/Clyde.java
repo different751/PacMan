@@ -20,21 +20,21 @@ import org.newdawn.slick.Animation;
  */
 class Clyde extends Entity {
 	public Animation inkani;
-	private int countdown;
-	private int state=-1;
-	private Vector velocity;
-	private int nexttile;
-	private int currenttilex=14;
-	private int currenttiley=11;
-	private int nexttilex=0;
-	private int nexttiley=0;
-	private int check=0;
-	private float clydex=272;
-	private float clydey=280;
-	private int desired=0;
-	private int current=0;
-	private int key=0;
-	private int outcount=87;
+	public int countdown;
+	public int state=-1;
+	public Vector velocity;
+	public int nexttile;
+	public int currenttilex=14;
+	public int currenttiley=11;
+	public int nexttilex=0;
+	public int nexttiley=0;
+	public int check=0;
+	public float clydex=272;
+	public float clydey=280;
+	public int desired=0;
+	public int current=0;
+	public int key=0;
+	public int outcount=87;
 
 	public Clyde(final float x, final float y) {
 		super(x,y);

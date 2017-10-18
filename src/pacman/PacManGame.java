@@ -9,6 +9,8 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+import java.io.*;
+import java.util.Scanner;
 
 
 public class PacManGame extends StateBasedGame {
@@ -18,6 +20,8 @@ public class PacManGame extends StateBasedGame {
 	//public static final int GAMEOVERSTATE = 5;
 	public static final int LEVEL1 = 1;
 	public static final int WINSTATE = 2;
+	public static final int GAMEOVERSTATE =3;
+	public static final int HIGHSCORESTATE=4;
 	
 	public static final String MAZE_MAZE_RSC = "PacMan/resource/pacmaze.png";
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
@@ -43,6 +47,15 @@ public class PacManGame extends StateBasedGame {
 	public static final String CH_CH_RSC = "PacMan/resource/cherry.png";
 	public static final String PE_PE_RSC = "PacMan/resource/peach.png";
 	public static final String ST_ST_RSC = "PacMan/resource/Strawberry.png";
+	public static final String DE1_DE1_RSC = "PacMan/resource/pacdead1.png";
+	public static final String DE2_DE2_RSC = "PacMan/resource/pacdead2.png";
+	public static final String DE3_DE3_RSC = "PacMan/resource/pacdead3.png";
+	public static final String DE4_DE4_RSC = "PacMan/resource/pacdead4.png";
+	public static final String DE5_DE5_RSC = "PacMan/resource/pacdead5.png";
+	public static final String DE6_DE6_RSC = "PacMan/resource/pacdead6.png";
+	public static final String DE_DE_RSC = "PacMan/resource/pacsingle.png";
+	public String file = "highscore.txt";
+	
 	//public static final String 
 	
 	
@@ -94,12 +107,21 @@ public class PacManGame extends StateBasedGame {
 	
 	
 	PacManObj pacman;
+	PacManDead pacdead;
 	Blinky blinky;
 	Inky inky;
 	Pinky pinky;
 	Clyde clyde;
 	float winx;
 	float winy;
+	int score=0;
+	int highscore;
+	int lives=3;
+	int i=0;
+	String line = null;
+	String scorearray[];
+	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+	InputStream is = classloader.getResourceAsStream("PacMan/highscore.txt");
 	//Energydot enrdot[];
 	//dots dot[];
 
@@ -134,6 +156,8 @@ public class PacManGame extends StateBasedGame {
 		//addState(new StartUpState());
 		addState(new level1());
 		addState(new Winstate());
+		addState(new Gameoverstate());
+		addState(new Highscorestate());
 		
 		
 		
@@ -168,16 +192,51 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(ST_ST_RSC);
 		ResourceManager.loadImage(CH_CH_RSC);
 		ResourceManager.loadImage(PE_PE_RSC);
+		ResourceManager.loadImage(DE1_DE1_RSC);
+		ResourceManager.loadImage(DE2_DE2_RSC);
+		ResourceManager.loadImage(DE3_DE3_RSC);
+		ResourceManager.loadImage(DE4_DE4_RSC);
+		ResourceManager.loadImage(DE5_DE5_RSC);
+		ResourceManager.loadImage(DE6_DE6_RSC);
+		
 		
 		//food=new dots[244];
 		
 		pacman = new PacManObj(232,424,0,0);
+		pacdead = new PacManDead(232,424);
 		blinky = new Blinky(232,232);
 		inky = new Inky(192,280);
 		pinky = new Pinky(224,280);
 		clyde = new Clyde(256,280);
+		scorearray = new String[10];
 		//enrdot=new Energydot[4];
 		//dot=new dots[241];
+		
+		
+		//read highscore
+
+        try {
+            FileReader filereader = new FileReader(file);
+
+            BufferedReader buffreader = new BufferedReader(filereader);
+
+            while((line = buffreader.readLine()) != null) {
+                scorearray[i]=line;
+                i++;
+            }   
+
+            // Always close files.
+            buffreader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file '" + file + "'");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file '"+ file + "'");                  
+        }
+    
+		
+		//end read highscore
 		
 		
 	

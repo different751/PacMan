@@ -16,24 +16,19 @@ import org.newdawn.slick.Animation;
  * explosions to determine when they are no longer active and remove/hide
  * them at that point.
  */
-class PacManObj extends Entity {
-	public Animation PacManAni;
+class PacManDead extends Entity {
 	public Animation PacMandeath;
 	private int countdown;
 	private Vector velocity;
 	private int nexttile;
 	private int currentile;
 
-	public PacManObj(final float x, final float y, final float vx, final float vy) {
+	public PacManDead(final float x, final float y) {
 		super(x,y);
-		PacManAni = new Animation(ResourceManager.getSpriteSheet(PacManGame.PACMAN_PACMAN_RSC, 28, 28),75);
 		PacMandeath = new Animation(ResourceManager.getSpriteSheet(PacManGame.DE_DE_RSC, 28, 28),240);
-		addAnimation(PacManAni);
-		PacManAni.setLooping(true);
+		addAnimation(PacMandeath);
 		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC));
 		countdown=0;
-		velocity= new Vector(vx,vy);
-		//ResourceManager.getSound(BounceGame.BANG_EXPLOSIONSND_RSC).play();
 	}
 
 	public void setVelocity(final Vector v) {
