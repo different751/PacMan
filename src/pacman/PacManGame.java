@@ -54,6 +54,7 @@ public class PacManGame extends StateBasedGame {
 	public static final String DE5_DE5_RSC = "PacMan/resource/pacdead5.png";
 	public static final String DE6_DE6_RSC = "PacMan/resource/pacdead6.png";
 	public static final String DE_DE_RSC = "PacMan/resource/pacsingle.png";
+	public static final String LIVE_LIVE_RSC = "PacMan/resource/paclives.png";
 	public String file = "highscore.txt";
 	
 	//public static final String 
@@ -198,6 +199,7 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(DE4_DE4_RSC);
 		ResourceManager.loadImage(DE5_DE5_RSC);
 		ResourceManager.loadImage(DE6_DE6_RSC);
+		ResourceManager.loadImage(LIVE_LIVE_RSC);
 		
 		
 		//food=new dots[244];
@@ -229,10 +231,10 @@ public class PacManGame extends StateBasedGame {
             buffreader.close();         
         }
         catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file '" + file + "'");                
+            System.out.println("Unable to open file");                
         }
         catch(IOException ex) {
-            System.out.println("Error reading file '"+ file + "'");                  
+            System.out.println("Error reading file");                  
         }
     
 		
