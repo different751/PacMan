@@ -249,6 +249,9 @@ public class level1 extends BasicGameState {
 			}
 		}
 		
+		for(int i=1; i<pg.lives;i++){
+			g.drawImage(ResourceManager.getImage(PacManGame.LIVE_LIVE_RSC),(i*32)-24 , 545);
+		}
 		
 		
 		

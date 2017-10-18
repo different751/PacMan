@@ -8,6 +8,9 @@ __________COMPLETED__________
 **9** : Music/Sound effects
 **15** : win state
 **12** : bonus fruit
+**22** : draw lives
+**10** : High Score system/game over state
+
 __________TO BE COMPLETED__________
 
 
@@ -15,23 +18,18 @@ __________TO BE COMPLETED__________
 6 : Splash Screen
 7 : Ghost States
 8 : Second level
-
-10 : High Score system/game over state
-
-
 14 : teleport pac man and ghost around map
-
-
 18 : tweak player movement
 19 : tweak AI movement
 20 : title screen
 21 : cheat codes
-22 : draw lives
+22 : adjust animations
+
 
 
 __________Minor Random Ideas_______
 MRI 1 : add score text after fruit eat
-MRI 2 : Need to reset i on PacMan
+MRI 2 : Need to reset i on PacMan for highscore while loop
 
 __________Optional Features_________
 OF 1 : different AI personalities

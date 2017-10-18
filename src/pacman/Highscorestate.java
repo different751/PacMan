@@ -76,7 +76,7 @@ public class Highscorestate extends BasicGameState {
             buffwriter.close();
         }
         catch(IOException ex) {
-            System.out.println( "Error writing to file '"+ pg.file + "'");
+            System.out.println( "Error writing to file");
         }
 	}
 	
