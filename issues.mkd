@@ -19,7 +19,6 @@ __________TO BE COMPLETED__________
 
 6 : Splash Screen
 7 : Ghost States
-
 18 : tweak player movement
 19 : tweak AI movement
 20 : title screen
