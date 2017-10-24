@@ -23,6 +23,7 @@ public class PacManGame extends StateBasedGame {
 	public static final int GAMEOVERSTATE =3;
 	public static final int HIGHSCORESTATE=4;
 	public static final int LEVEL2= 5;
+	public static final int MENU=6;
 	
 	public static final String MAZE_MAZE_RSC = "PacMan/resource/pacmaze.png";
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
@@ -58,6 +59,7 @@ public class PacManGame extends StateBasedGame {
 	public static final String LIVE_LIVE_RSC = "PacMan/resource/paclives.png";
 	public static final String lv2_lv2_RSC = "PacMan/resource/2ndlvl.png";
 	public static final String lv2w_lv2w_RSC = "PacMan/resource/2ndlvlwin.png";
+	public static final String title_title_RSC = "PacMan/resource/title.png";
 	public String file = "highscore.txt";
 	
 	//public static final String 
@@ -203,6 +205,7 @@ public class PacManGame extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 	
 		//addState(new StartUpState());
+		addState(new Menu());
 		addState(new level2());
 		addState(new level1());
 		addState(new Winstate());
@@ -251,6 +254,7 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(LIVE_LIVE_RSC);
 		ResourceManager.loadImage(lv2_lv2_RSC);
 		ResourceManager.loadImage(lv2w_lv2w_RSC);
+		ResourceManager.loadImage(title_title_RSC);
 		
 		
 		//food=new dots[244];
