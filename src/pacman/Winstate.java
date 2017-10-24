@@ -30,13 +30,23 @@ public class Winstate extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
+		if(pg.currentlevel==1){
 		if(state==0)
 		g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),0, 48);
 		
 		if(state==1)
 		g.drawImage(ResourceManager.getImage(PacManGame.Win_Win_RSC),0,48);
 		
+		}
 		
+		if(pg.currentlevel==2){
+			if(state==0)
+				g.drawImage(ResourceManager.getImage(PacManGame.lv2_lv2_RSC),0, 48);
+				
+				if(state==1)
+				g.drawImage(ResourceManager.getImage(PacManGame.lv2w_lv2w_RSC),0,48);
+
+		}
 		pg.pacman.render(g);
 		pg.pacman.setX(pg.winx);
 		pg.pacman.setY(pg.winy);
@@ -93,7 +103,13 @@ public class Winstate extends BasicGameState {
 		}
 		
 		if(timer<0 && count ==8){
-			//change level to level 2
+			if(pg.currentlevel==2){
+				pg.enterState(PacManGame.LEVEL1);
+			}
+			
+			if(pg.currentlevel==1){
+				pg.enterState(PacManGame.HIGHSCORESTATE);
+			}
 			System.out.println("Next Level");
 		}
 		

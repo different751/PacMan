@@ -1,5 +1,7 @@
 package pacman;
 
+
+
 import jig.ResourceManager;
 import jig.Vector;
 
@@ -20,14 +22,14 @@ import org.newdawn.slick.tiled.TiledMap;
 
 
 
-public class level1 extends BasicGameState {
+public class level2 extends BasicGameState {
 
 	
 	PacManGame pg;
 	dots food = new dots();
 	Energydot enrdot = new Energydot();
 	float pacx=232;
-	float pacy=424;
+	float pacy=456;
 	int tileheight=16;
 	int tilewidth=16;
 	int currenttilex;
@@ -42,9 +44,9 @@ public class level1 extends BasicGameState {
 	int tiledown=0;
 	int flag=0;
 	int startingx=14;
-	int startingy=23;
+	int startingy=25;
 	int mazex=14;
-	int mazey=23;
+	int mazey=25;
 	int nextmazex=0;
 	int nextmazey=0;
 	int check;
@@ -60,13 +62,14 @@ public class level1 extends BasicGameState {
 	int scaredtimer=0;
 	int scaredflag=0;
 	int mazescared=0;
-	int winstate=244;
+	int winstate=251;
 	int fruittiley=17;
 	int fruittilex=14;
 	int fruittimer=25000;
 	int fruit=0;
 	int secondcheck=-1;
 	int wrapflag=0;
+	int fruitcounter=0;
 	//use render instead
 
 	@Override
@@ -79,18 +82,18 @@ public class level1 extends BasicGameState {
 	public void enter(GameContainer container, StateBasedGame game) {
 		pg = (PacManGame)game;
 		
-		// currenttilex=(int) ((pg.pacman.getX()-8)/16);
-		 //currenttiley=(int) ((pg.pacman.getY()-56)/16);
+		// currenttilex=(int) ((pg.pacman2.getX()-8)/16);
+		 //currenttiley=(int) ((pg.pacman2.getY()-56)/16);
 		 currenttilex=14;
-		 currenttiley=23;
+		 currenttiley=25;
 		
 		container.setSoundOn(true);
 		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
 		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
-		 pg.pacman.setX(232);
+		 pg.pacman2.setX(232);
 		 pacx=232;
-		 pacy=424;
-		 pg.pacman.setY(424);
+		 pacy=456;
+		 pg.pacman2.setY(456);
 		 pg.pacman.PacManAni.restart();
 		 
 		 
@@ -164,7 +167,7 @@ public class level1 extends BasicGameState {
 
 
 		 
-		//ResourceManager.getSound(PacManGame.Waka_Waka_RSC).loop();
+		//ResourceManager.getSound(pacman2Game.Waka_Waka_RSC).loop();
 		 
 		 
 		 //add all of blinkys and other ghost starting variables
@@ -178,9 +181,9 @@ public class level1 extends BasicGameState {
 			tiledown=0;
 			flag=0;
 			startingx=14;
-			startingy=23;
+			startingy=25;
 			mazex=14;
-			mazey=23;
+			mazey=25;
 			nextmazex=0;
 			nextmazey=0;
 			check=0;
@@ -196,7 +199,7 @@ public class level1 extends BasicGameState {
 			scaredtimer=0;
 			scaredflag=0;
 			mazescared=0;
-			//winstate=244;
+			//winstate=320;
 			fruittiley=17;
 			fruittilex=14;
 			fruittimer=25000;
@@ -213,7 +216,7 @@ public class level1 extends BasicGameState {
 		
 		
 		
-		g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),0, 48);	
+		g.drawImage(ResourceManager.getImage(PacManGame.lv2_lv2_RSC),0, 48);	
 	
 		g.drawString("Score: " + pg.score, 310, 30);
 		g.drawString("High Score: " + pg.scorearray[0], 16, 30);
@@ -221,20 +224,20 @@ public class level1 extends BasicGameState {
 		
 		for(int i=0;i<31;i++){
 			for(int z=0;z<28;z++){
-				if(pg.maze[i][z]==0){
+				if(pg.maze2[i][z]==0){
 					
 					food.dotani.getCurrentFrame().drawCentered((z * 16) +8,(i*16)+56);
 					
 					
 				}
 				
-				if(pg.maze[i][z]==2){
+				if(pg.maze2[i][z]==2){
 					
 					enrdot.enrani.getCurrentFrame().drawCentered((z * 16) +8,(i*16)+56);
 					
 				}
 				
-				if(pg.maze[i][z]==8){
+				if(pg.maze2[i][z]==8){
 					if(fruit==0){
 						g.drawImage(ResourceManager.getImage(PacManGame.CH_CH_RSC),(z * 16) +8,(i*16)+50);
 					}
@@ -259,7 +262,7 @@ public class level1 extends BasicGameState {
 		
 		
 		
-		pg.pacman.render(g);
+		pg.pacman2.render(g);
 		
 		pg.blinky.render(g);
 		pg.inky.render(g);
@@ -276,10 +279,11 @@ public class level1 extends BasicGameState {
 		Input input = container.getInput();
 		PacManGame pg = (PacManGame)game;
 		
-		pg.currentlevel=1;
+		pg.currentlevel=2;
+		System.out.println(winstate);
 		
-		currenttilex=(int) (((pg.pacman.getX())-8)/16);
-		currenttiley=(int) ((pg.pacman.getY()-56)/16);
+		currenttilex=(int) (((pg.pacman2.getX())-8)/16);
+		currenttiley=(int) ((pg.pacman2.getY()-56)/16);
 		
 		tileup=currenttiley-1;
 		tiledown=currenttiley+1;
@@ -298,10 +302,10 @@ public class level1 extends BasicGameState {
 		
 		if(input.isKeyPressed(Input.KEY_T) ){
 			System.out.println(currenttilex +","+ currenttiley + " Maze element: "+ pg.maze[currenttiley][currenttilex]);
-			System.out.println("LEFT"+ " Maze element: "+ pg.maze[currenttiley][currenttilex-1]);
-			System.out.println("RIGHT"+ " Maze element: "+ pg.maze[currenttiley][currenttilex+1]);
-			System.out.println("DOWN"+ " Maze element: "+ pg.maze[currenttiley+1][currenttilex]);
-			System.out.println("UP"+ " Maze element: "+ pg.maze[currenttiley-1][currenttilex]);
+			System.out.println("LEFT"+ " Maze element: "+ pg.maze2[currenttiley][currenttilex-1]);
+			System.out.println("RIGHT"+ " Maze element: "+ pg.maze2[currenttiley][currenttilex+1]);
+			System.out.println("DOWN"+ " Maze element: "+ pg.maze2[currenttiley+1][currenttilex]);
+			System.out.println("UP"+ " Maze element: "+ pg.maze2[currenttiley-1][currenttilex]);
 			System.out.println("desired "+desired);
 			System.out.println("current "+current);
 		}
@@ -361,8 +365,8 @@ public class level1 extends BasicGameState {
 			if(check>0){
 				pacx-=1.6;
 				check-=1;
-				pg.pacman.setX(pacx);
-				pg.maze[mazey][mazex]=-1;
+				pg.pacman2.setX(pacx);
+				pg.maze2[mazey][mazex]=-1;
 				
 				if(check==0 && mazescared == 0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
@@ -404,8 +408,8 @@ public class level1 extends BasicGameState {
 			if(check>0){
 				pacx+=1.6;
 				check-=1;
-				pg.pacman.setX(pacx);
-				pg.maze[mazey][mazex]=-1;
+				pg.pacman2.setX(pacx);
+				pg.maze2[mazey][mazex]=-1;
 				
 				if(check==0 && mazescared == 0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
@@ -444,8 +448,8 @@ public class level1 extends BasicGameState {
 			if(check>0){
 				pacy-=1.6;
 				check-=1;
-				pg.pacman.setY(pacy);
-				pg.maze[mazey][mazex]=-1;
+				pg.pacman2.setY(pacy);
+				pg.maze2[mazey][mazex]=-1;
 				
 				if(check==0 && mazescared==0){
 					if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing() == false){
@@ -484,8 +488,8 @@ public class level1 extends BasicGameState {
 			if(check>0){
 				pacy+=1.6;
 				check-=1;
-				pg.pacman.setY(pacy);
-				pg.maze[mazey][mazex]=-1;
+				pg.pacman2.setY(pacy);
+				pg.maze2[mazey][mazex]=-1;
 				
 				if(check==0 && mazescared==0){
 					
@@ -529,13 +533,13 @@ public class level1 extends BasicGameState {
 				System.out.println("HERE");
 				pacx+=1.6;
 				check-=1;
-				pg.pacman.setX(pacx);
+				pg.pacman2.setX(pacx);
 				mazex=2;
 				mazey=14;
 			}
 			else if(check<=0 && wrapflag ==0){
 				System.out.println("HERE2");
-				pg.pacman.setX(0);
+				pg.pacman2.setX(0);
 				pacx=0;
 				secondcheck=25;
 				wrapflag=1;
@@ -545,7 +549,7 @@ public class level1 extends BasicGameState {
 				System.out.println("HERE3");
 				pacx+=1.6;
 				secondcheck-=1;
-				pg.pacman.setX(pacx);
+				pg.pacman2.setX(pacx);
 			}
 			else if(secondcheck<=0 && wrapflag==1){
 				mazex=2;
@@ -559,13 +563,13 @@ public class level1 extends BasicGameState {
 				System.out.println("HERE");
 				pacx-=1.6;
 				check-=1;
-				pg.pacman.setX(pacx);
+				pg.pacman2.setX(pacx);
 				mazex=25;
 				mazey=14;
 			}
 			else if(check<=0 && wrapflag ==0){
 				System.out.println("HERE2");
-				pg.pacman.setX(0);
+				pg.pacman2.setX(0);
 				pacx=448;
 				secondcheck=25;
 				wrapflag=1;
@@ -575,7 +579,7 @@ public class level1 extends BasicGameState {
 				System.out.println("HERE3");
 				pacx-=1.6;
 				secondcheck-=1;
-				pg.pacman.setX(pacx);
+				pg.pacman2.setX(pacx);
 			}
 			else if(secondcheck<=0 && wrapflag==1){
 				mazex=25;
@@ -591,7 +595,7 @@ public class level1 extends BasicGameState {
 		
 		
 		
-		pg.blinky.choice(mazex, mazey, pg);
+		pg.blinky.choice2(mazex, mazey, pg);
 		
 		timer -=delta;
 		if(timer<12000){
@@ -640,11 +644,11 @@ public class level1 extends BasicGameState {
 		
 		fruittimer-=delta;
 		if(fruittimer<0){
-			if(pg.maze[fruittiley][fruittilex]==3){
-				pg.maze[fruittiley][fruittilex]=8;
+			if(pg.maze2[fruittiley][fruittilex]==3){
+				pg.maze2[fruittiley][fruittilex]=8;
 				fruittimer=10000;
 			}else{
-				pg.maze[fruittiley][fruittilex]=3;
+				pg.maze2[fruittiley][fruittilex]=3;
 				fruit++;
 				if(fruit==3)
 					fruit=0;
@@ -659,15 +663,15 @@ public class level1 extends BasicGameState {
 				
 		
 		if(desired==3){
-			if(pg.maze[mazey][mazex]==6){
+			if(pg.maze2[mazey][mazex]==6){
 				state=6;
 				check=20;
 				wrapflag=0;
 				return;
 			}
-			if(pg.maze[mazey][mazex-1]!=1){
+			if(pg.maze2[mazey][mazex-1]!=1){
 				state=1;
-				mazescared = pg.maze[mazey][mazex-1];
+				mazescared = pg.maze2[mazey][mazex-1];
 				nextmazex=mazex-1;
 				nextmazey=mazey;
 				key=3;
@@ -683,9 +687,9 @@ public class level1 extends BasicGameState {
 		}
 		
 		if(desired==1){
-			if(pg.maze[mazey-1][mazex]!=1){
+			if(pg.maze2[mazey-1][mazex]!=1){
 				state=3;
-				mazescared = pg.maze[mazey-1][mazex];
+				mazescared = pg.maze2[mazey-1][mazex];
 				nextmazex=mazex;
 				nextmazey=mazey-1;
 				key=1;
@@ -702,9 +706,9 @@ public class level1 extends BasicGameState {
 		}
 		
 		if(desired==2){
-			if(pg.maze[mazey+1][mazex]!=1){
+			if(pg.maze2[mazey+1][mazex]!=1){
 				state=4;
-				mazescared = pg.maze[mazey+1][mazex];
+				mazescared = pg.maze2[mazey+1][mazex];
 				nextmazex=mazex;
 				nextmazey=mazey+1;
 				key=2;
@@ -720,16 +724,16 @@ public class level1 extends BasicGameState {
 		}
 		
 		if(desired==4){
-			if(pg.maze[mazey][mazex]==5){
+			if(pg.maze2[mazey][mazex]==5){
 				System.out.println("MADE IT");
 				state=5;
 				check=20;
 				wrapflag=0;
 				return;
 			}
-			if(pg.maze[mazey][mazex+1]!=1){
+			if(pg.maze2[mazey][mazex+1]!=1){
 				state=2;
-				mazescared = pg.maze[mazey][mazex+1];
+				mazescared = pg.maze2[mazey][mazex+1];
 				nextmazex=mazex+1;
 				nextmazey=mazey;
 				key=4;
@@ -754,7 +758,7 @@ public class level1 extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return PacManGame.LEVEL1;
+		return PacManGame.LEVEL2;
 	}
 	
 }
