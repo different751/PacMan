@@ -5,6 +5,9 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+
 import java.io.*;
 import java.util.Arrays;
 
@@ -12,6 +15,7 @@ public class Highscorestate extends BasicGameState {
 	int intscores[];
 
 	PacManGame pg;
+	int timer;
 	
 	boolean ishigh = false;
 
@@ -24,6 +28,7 @@ public class Highscorestate extends BasicGameState {
 	
 	public void enter(GameContainer container, StateBasedGame game){
 		intscores=new int[10];
+		timer = 8000;
 		pg = (PacManGame)game;
 		this.scoretoint();
 		for(int i=0;i<10;i++){
@@ -58,7 +63,11 @@ public class Highscorestate extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
-		
+		timer -= delta;
+		if (timer <= 0)
+			game.enterState(PacManGame.MENU, new EmptyTransition(), new HorizontalSplitTransition() );
+
+		// check if there are any finished explosions, if so remove them
 		
 	}
 	

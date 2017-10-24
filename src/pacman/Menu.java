@@ -73,8 +73,8 @@ class Menu extends BasicGameState {
 		
 		
 		
-		//if(input.isKeyDown(Input.KEY_C))
-			//game.enterState(PacManGame.SPLASHSTATE,new EmptyTransition(),new HorizontalSplitTransition());
+		if(input.isKeyDown(Input.KEY_C))
+			game.enterState(PacManGame.SPLASH,new EmptyTransition(),new HorizontalSplitTransition());
 		// check if there are any finished explosions, if so remove them
 		//if (input.isKeyDown(Input.KEY_N))
 			//game.enterState(PacManGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
