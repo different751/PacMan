@@ -12,18 +12,20 @@ __________COMPLETED__________
 **10** : High Score system/game over state
 **14** : teleport pac man around map
 **8** : Second level
+**6** : Splash Screen
+**20** : title screen
 
 __________TO BE COMPLETED__________
 
 
 
-6 : Splash Screen
+
 7 : Ghost States
 18 : tweak player movement
 19 : tweak AI movement
-20 : title screen
 21 : cheat codes
 22 : adjust animations
+23 : reset mazes if end game
 
 
 
