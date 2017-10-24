@@ -22,6 +22,7 @@ public class PacManGame extends StateBasedGame {
 	public static final int WINSTATE = 2;
 	public static final int GAMEOVERSTATE =3;
 	public static final int HIGHSCORESTATE=4;
+	public static final int LEVEL2= 5;
 	
 	public static final String MAZE_MAZE_RSC = "PacMan/resource/pacmaze.png";
 	public static final String PACMAN_PACMAN_RSC = "PacMan/resource/pacman_spritesheet.png";
@@ -55,6 +56,8 @@ public class PacManGame extends StateBasedGame {
 	public static final String DE6_DE6_RSC = "PacMan/resource/pacdead6.png";
 	public static final String DE_DE_RSC = "PacMan/resource/pacsingle.png";
 	public static final String LIVE_LIVE_RSC = "PacMan/resource/paclives.png";
+	public static final String lv2_lv2_RSC = "PacMan/resource/2ndlvl.png";
+	public static final String lv2w_lv2w_RSC = "PacMan/resource/2ndlvlwin.png";
 	public String file = "highscore.txt";
 	
 	//public static final String 
@@ -106,6 +109,40 @@ public class PacManGame extends StateBasedGame {
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 	
+	int maze2[][]={
+			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1},
+			{1,2,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,2,1},
+			{1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,0,0,0,0,0,0,0,0,3,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,3,3,3,3,3,3,3,3,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,1,1,3,1,3,3,3,3,3,3,1,3,1,1,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,3,3,3,1,3,3,3,3,3,3,1,3,3,3,0,1,1,1,1,0,1},//midpoint
+			{1,0,1,1,1,1,0,1,1,3,1,3,3,3,3,3,3,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,1,1,3,3,3,3,3,3,3,3,3,3,1,1,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,1,1,1,1,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,1,1,1,1,0,1,1,3,0,0,0,0,0,0,0,0,3,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,1,1,3,1,1,3,1,1,3,1,1,3,1,1,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,3,1,1,3,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,2,1,1,1,1,0,1,1,3,1,1,3,1,1,3,1,1,3,1,1,0,1,1,1,1,2,1},
+			{1,0,1,1,1,1,0,1,1,3,1,1,3,1,1,3,1,1,3,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1},
+			{1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1},
+			{1,0,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+	};
+	
 	
 	PacManObj pacman;
 	PacManDead pacdead;
@@ -113,10 +150,21 @@ public class PacManGame extends StateBasedGame {
 	Inky inky;
 	Pinky pinky;
 	Clyde clyde;
+	
+	PacManObj pacman2;
+	PacManDead pacdead2;
+	Blinky blinky2;
+	Inky inky2;
+	Pinky pinky2;
+	Clyde clyde2;
+	
+	
+	
 	float winx;
 	float winy;
 	int score=0;
 	int highscore;
+	int currentlevel=1;
 	int lives=3;
 	int i=0;
 	String line = null;
@@ -155,6 +203,7 @@ public class PacManGame extends StateBasedGame {
 	public void initStatesList(GameContainer container) throws SlickException {
 	
 		//addState(new StartUpState());
+		addState(new level2());
 		addState(new level1());
 		addState(new Winstate());
 		addState(new Gameoverstate());
@@ -200,6 +249,8 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(DE5_DE5_RSC);
 		ResourceManager.loadImage(DE6_DE6_RSC);
 		ResourceManager.loadImage(LIVE_LIVE_RSC);
+		ResourceManager.loadImage(lv2_lv2_RSC);
+		ResourceManager.loadImage(lv2w_lv2w_RSC);
 		
 		
 		//food=new dots[244];
@@ -210,6 +261,16 @@ public class PacManGame extends StateBasedGame {
 		inky = new Inky(192,280);
 		pinky = new Pinky(224,280);
 		clyde = new Clyde(256,280);
+		
+		pacman2 = new PacManObj(232,536,0,0);
+		pacdead2 = new PacManDead(232,424);
+		blinky2 = new Blinky(232,232);
+		inky2 = new Inky(192,280);
+		pinky2 = new Pinky(224,280);
+		clyde2 = new Clyde(256,280);
+		
+		
+		
 		scorearray = new String[10];
 		//enrdot=new Energydot[4];
 		//dot=new dots[241];

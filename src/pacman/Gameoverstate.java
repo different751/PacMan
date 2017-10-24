@@ -42,7 +42,11 @@ public class Gameoverstate extends BasicGameState {
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
 		// TODO Auto-generated method stub
-		g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),0, 48);
+		if(pg.currentlevel==2)
+			g.drawImage(ResourceManager.getImage(PacManGame.lv2_lv2_RSC),0, 48);
+		
+		if(pg.currentlevel==1)
+			g.drawImage(ResourceManager.getImage(PacManGame.MAZE_MAZE_RSC),0, 48);
 		
 		
 		if(state==0)
@@ -108,8 +112,11 @@ public class Gameoverstate extends BasicGameState {
 				System.out.println("PASS");
 				pg.enterState(PacManGame.HIGHSCORESTATE);
 			}
-			else{
+			else if(pg.currentlevel==2){
 				System.out.println(pg.winx + "," + pg.winy);
+				pg.enterState(PacManGame.LEVEL2);
+			}
+			else if(pg.currentlevel==1){
 				pg.enterState(PacManGame.LEVEL1);
 			}
 		}

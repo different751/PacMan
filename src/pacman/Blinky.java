@@ -129,6 +129,89 @@ class Blinky extends Entity {
 		
 	}
 	
+	public void choice2(int mazex, int mazey, PacManGame pg){
+		//System.out.println(currenttilex +","+ currenttiley);
+		if(state==0){
+			if(currenttiley < mazey){
+				//move down
+					desired =2;
+					this.move2(pg);
+			}
+		
+			 if(currenttilex < mazex){
+				//move right
+				
+				desired =4;
+				this.move2(pg);
+			}
+		
+			 if(currenttiley> mazey){
+				//move up
+				  
+					desired=1;
+					this.move2(pg);
+				
+			}
+		
+			  if(currenttilex > mazex){
+				//move left
+					desired=3;
+					this.move2(pg);
+	
+			}
+		}
+		
+		if(state==1){
+			
+			if(check>0){
+				blinkx-=1.6;
+				check-=1;
+				pg.blinky.setX(blinkx);
+			}
+			else{
+				state=0;
+				currenttilex=nexttilex;
+			}
+			
+			
+		}
+		if(state==2){
+			if(check>0){
+				blinkx+=1.6;
+				check-=1;
+				pg.blinky.setX(blinkx);
+			}
+			else{
+				state=0;
+				currenttilex=nexttilex;
+			}
+		}
+		if(state==3){
+			if(check>0){
+				blinky-=1.6;
+				check-=1;
+				pg.blinky.setY(blinky);
+			}
+			else{
+				state=0;
+				currenttiley=nexttiley;
+			}
+		}
+		if(state==4){
+			
+			if(check>0){
+				blinky+=1.6;
+				check-=1;
+				pg.blinky.setY(blinky);
+			}
+			else{
+				state=0;
+				currenttiley=nexttiley;
+			}
+		}
+		
+	}
+	
 	private void move(PacManGame pg){
 		if(desired==3){
 			if(pg.maze[currenttiley][currenttilex-1]!=1){
@@ -184,6 +267,78 @@ class Blinky extends Entity {
 		
 		if(desired==4){
 			if(pg.maze[currenttiley][currenttilex+1]!=1){
+				state=2;
+				nexttilex=currenttilex+1;
+				nexttiley=currenttiley;
+				key=4;
+				check=10;
+				current=4;
+				return;
+			}
+			else if(current==4){
+				//state=0;
+				return;
+			}
+			return;
+		}
+		return;
+	}
+	
+	private void move2(PacManGame pg){
+		if(desired==3){
+			if(pg.maze2[currenttiley][currenttilex-1]!=1){
+				state=1;
+				nexttilex=currenttilex-1;
+				nexttiley=currenttiley;
+				key=3;
+				check=10;
+				current=3;
+				return;
+			}
+			else if(current==3){
+				//state=3;
+				return;
+			}
+			return;
+		}
+		
+		if(desired==1){
+			if(pg.maze2[currenttiley-1][currenttilex]!=1){
+				state=3;
+				nexttilex=currenttilex;
+				nexttiley=currenttiley-1;
+				key=1;
+				check=10;
+				current=1;
+				return;
+			}
+			else if(current==1){
+				//state=0;
+				return;
+			}
+			
+			return;
+		}
+		
+		if(desired==2){
+			if(pg.maze2[currenttiley+1][currenttilex]!=1){
+				state=4;
+				nexttilex=currenttilex;
+				nexttiley=currenttiley+1;
+				key=2;
+				check=10;
+				current=2;
+				return;
+			}
+			else if(current==2){
+				//state=0;
+				return;
+			}
+			return;
+		}
+		
+		if(desired==4){
+			if(pg.maze2[currenttiley][currenttilex+1]!=1){
 				state=2;
 				nexttilex=currenttilex+1;
 				nexttiley=currenttiley;
