@@ -25,7 +25,7 @@ __________TO BE COMPLETED__________
 19 : tweak AI movement
 21 : cheat codes
 22 : adjust animations
-23 : reset mazes if end game
+23 : reset mazes at end game
 
 
 
