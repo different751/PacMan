@@ -33,7 +33,13 @@ class Menu extends BasicGameState {
 	
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
-		
+		PacManGame pg = (PacManGame)game;
+		for(int i=0;i<31;i++){
+			for(int z=0;z<28;z++){
+				pg.maze[i][z]=pg.mazecopy[i][z];
+				pg. maze2[i][z]=pg. maze2copy[i][z];
+			}
+		}
 	}
 
 	
@@ -43,7 +49,7 @@ class Menu extends BasicGameState {
 
 		PacManGame pg = (PacManGame)game;
 		
-		g.drawImage(ResourceManager.getImage(PacManGame.title_title_RSC), (pg.ScreenWidth/5)-130,
+		g.drawImage(ResourceManager.getImage(PacManGame.title_title_RSC), (pg.ScreenWidth/5)-135,
 				pg.ScreenHeight/12);
 		g.drawString("Press 'Space' To Play", (pg.ScreenWidth/2)-100, (pg.ScreenHeight/3)+15);
 		//g.drawString("Press 'd' For Demo Mode", (pg.ScreenWidth/2)-100, (pg.ScreenHeight/3)+35);

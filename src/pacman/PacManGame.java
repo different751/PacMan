@@ -113,6 +113,8 @@ public class PacManGame extends StateBasedGame {
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
 	
+	int mazecopy[][] = new int[31][28];
+	
 	int maze2[][]={
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -146,6 +148,8 @@ public class PacManGame extends StateBasedGame {
 			{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 			{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 	};
+	
+	int maze2copy[][]= new int[31][28];
 	
 	
 	PacManObj pacman;
@@ -285,6 +289,13 @@ public class PacManGame extends StateBasedGame {
 		
 		
 		//read highscore
+		
+		for(int i=0;i<31;i++){
+			for(int z=0;z<28;z++){
+				mazecopy[i][z]=maze[i][z];
+				maze2copy[i][z]=maze2[i][z];
+			}
+		}
 
         try {
             FileReader filereader = new FileReader(file);
