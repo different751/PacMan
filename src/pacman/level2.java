@@ -280,7 +280,7 @@ public class level2 extends BasicGameState {
 		PacManGame pg = (PacManGame)game;
 		
 		pg.currentlevel=2;
-		System.out.println(winstate);
+		//System.out.println(winstate);
 		
 		currenttilex=(int) (((pg.pacman2.getX())-8)/16);
 		currenttiley=(int) ((pg.pacman2.getY()-56)/16);
@@ -292,6 +292,33 @@ public class level2 extends BasicGameState {
 		
 		if(mazex==pg.blinky.getblinkmazex()){
 			if(mazey==pg.blinky.getblinkmazey() ){
+				pg.winx=pacx;
+				pg.winy=pacy;
+				pg.lives--;
+				pg.enterState(PacManGame.GAMEOVERSTATE);
+			}
+		}
+		
+		if(mazex==pg.clyde.getclydemazex()){
+			if(mazey==pg.clyde.getclydemazey() ){
+				pg.winx=pacx;
+				pg.winy=pacy;
+				pg.lives--;
+				pg.enterState(PacManGame.GAMEOVERSTATE);
+			}
+		}
+		
+		if(mazex==pg.pinky.getPinkymazex()){
+			if(mazey==pg.pinky.getPinkymazey() ){
+				pg.winx=pacx;
+				pg.winy=pacy;
+				pg.lives--;
+				pg.enterState(PacManGame.GAMEOVERSTATE);
+			}
+		}
+		
+		if(mazex==pg.inky.getInkymazex()){
+			if(mazey==pg.inky.getInkymazey() ){
 				pg.winx=pacx;
 				pg.winy=pacy;
 				pg.lives--;
@@ -599,30 +626,30 @@ public class level2 extends BasicGameState {
 		
 		timer -=delta;
 		if(timer<12000){
-			//pg.inky.movefromhome(pg);
+			pg.inky.movefromhome(pg);
 			inkyflag=1;
 		}
 		
 		if(inkyflag==1){
-			//pg.inky.choice(mazex, mazey, pg);
+			pg.inky.choice2(mazex, mazey, pg);
 		}
 		
 		if(timer<6000){
-			//pg.pinky.movefromhome(pg);
+			pg.pinky.movefromhome(pg);
 			pinkyflag=1;
 		}
 		
 		if(pinkyflag==1){
-			//pg.pinky.choice(mazex, mazey, pg);
+			pg.pinky.choice2(mazex, mazey, pg);
 		}
 		
 		if(timer < 0){
-			//pg.clyde.movefromhome(pg);
+			pg.clyde.movefromhome(pg);
 			clydeflag=1;
 		}
 		
 		if(clydeflag==1){
-			//pg.clyde.choice(mazex, mazey, pg);
+			pg.clyde.choice2(mazex, mazey, pg);
 		}
 		
 		
@@ -660,7 +687,6 @@ public class level2 extends BasicGameState {
 	}
 	
 	public void move(int desired){
-				
 		
 		if(desired==3){
 			if(pg.maze2[mazey][mazex]==6){
