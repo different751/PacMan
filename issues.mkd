@@ -14,6 +14,8 @@ __________COMPLETED__________
 **8** : Second level
 **6** : Splash Screen
 **20** : title screen
+**23** : reset mazes at end game
+**24** : tweak AI movement
 
 __________TO BE COMPLETED__________
 
@@ -22,16 +24,16 @@ __________TO BE COMPLETED__________
 
 7 : Ghost States
 18 : tweak player movement
-19 : tweak AI movement
 21 : cheat codes
 22 : adjust animations
-23 : reset mazes at end game
+
 
 
 
 __________Minor Random Ideas_______
 MRI 1 : add score text after fruit eat
 MRI 2 : Need to reset i on PacMan for highscore while loop
+MRI 3 : Need to fix bug when crossing ghost house causes death
 
 __________Optional Features_________
 OF 1 : different AI personalities
