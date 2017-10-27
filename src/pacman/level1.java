@@ -306,6 +306,12 @@ public class level1 extends BasicGameState {
 		tileright=currenttilex+1;
 		tileleft=currenttilex;
 		
+		
+		if(pg.score>3000 && pg.livesflag==0){
+			pg.lives++;
+			pg.livesflag=1;
+		}
+		
 		if(mazex==pg.blinky.getblinkmazex()){
 			if(mazey==pg.blinky.getblinkmazey() ){
 				if(scaredflag==1){
@@ -471,6 +477,7 @@ public class level1 extends BasicGameState {
 						
 						scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
 							
 							System.out.println("HELP");
@@ -514,6 +521,7 @@ public class level1 extends BasicGameState {
 						
 						scaredflag=1;
 							ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+							if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
 							
 							//System.out.println("HELP");
@@ -554,6 +562,7 @@ public class level1 extends BasicGameState {
 						
 						scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
 							
 							//System.out.println("HELP");
@@ -595,6 +604,7 @@ public class level1 extends BasicGameState {
 						
 						scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
 							
 							//System.out.println("HELP");

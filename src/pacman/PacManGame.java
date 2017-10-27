@@ -246,6 +246,7 @@ public class PacManGame extends StateBasedGame {
 	int currentlevel=1;
 	int lives=3;
 	int i=0;
+	int livesflag=0;
 	String line = null;
 	String scorearray[];
 	ClassLoader classloader = Thread.currentThread().getContextClassLoader();
