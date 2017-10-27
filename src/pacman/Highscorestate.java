@@ -2,11 +2,14 @@ package pacman;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.EmptyTransition;
 import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+
+import jig.ResourceManager;
 
 import java.io.*;
 import java.util.Arrays;
@@ -31,6 +34,11 @@ public class Highscorestate extends BasicGameState {
 		timer = 8000;
 		pg = (PacManGame)game;
 		pg.lives=3;
+		
+		ResourceManager.getSound(PacManGame.Waka_Waka_RSC).stop();
+		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+		ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
+		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
 		
 		this.scoretoint();
 		for(int i=0;i<10;i++){
@@ -67,6 +75,16 @@ public class Highscorestate extends BasicGameState {
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		// TODO Auto-generated method stub
+		Input input = container.getInput();
+		PacManGame pg = (PacManGame)game;
+
+		if (input.isKeyDown(Input.KEY_N))
+			game.enterState(PacManGame.MENU, new EmptyTransition(), new HorizontalSplitTransition() );
+		
+		if(input.isKeyDown(Input.KEY_ESCAPE))
+			game.enterState(PacManGame.MENU, new EmptyTransition(), new HorizontalSplitTransition() );
+		
+		
 		timer -= delta;
 		if (timer <= 0)
 			game.enterState(PacManGame.MENU, new EmptyTransition(), new HorizontalSplitTransition() );

@@ -21,6 +21,7 @@ __________COMPLETED__________
 **MRI 4** : fixed lives not resetting
 **MRI 5** : fixed score not reseting
 **MRI 6** : added ghost death sounds
+**21** : cheat codes
 
 __________TO BE COMPLETED__________
 
@@ -29,7 +30,7 @@ __________TO BE COMPLETED__________
 
 
 18 : tweak player movement  
-21 : cheat codes
+
 22 : adjust animations
 25 : add life after 3000 score
 

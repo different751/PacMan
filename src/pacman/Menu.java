@@ -39,6 +39,13 @@ class Menu extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		PacManGame pg = (PacManGame)game;
+		
+		ResourceManager.getSound(PacManGame.Waka_Waka_RSC).stop();
+		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+		ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
+		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
+		pg.lives=3;
+		pg.i=0;
 		for(int i=0;i<31;i++){
 			for(int z=0;z<28;z++){
 				pg.maze[i][z]=pg.mazecopy[i][z];
@@ -106,9 +113,11 @@ class Menu extends BasicGameState {
 		
 		if(input.isKeyDown(Input.KEY_C))
 			game.enterState(PacManGame.SPLASH,new EmptyTransition(),new HorizontalSplitTransition());
-		// check if there are any finished explosions, if so remove them
-		//if (input.isKeyDown(Input.KEY_N))
-			//game.enterState(PacManGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+		
+		
+		if (input.isKeyDown(Input.KEY_N))
+			game.enterState(PacManGame.LEVEL2, new EmptyTransition(), new HorizontalSplitTransition() );
+		
 
 	}
 
