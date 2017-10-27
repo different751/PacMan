@@ -33,7 +33,7 @@ public class level1 extends BasicGameState {
 	int currenttilex;
 	int currenttiley;
 	int nexttile;
-	int key=0;
+	int key=3;
 	float previousx=0;
 	float previousy=0;
 	int tileup=0;
@@ -60,7 +60,7 @@ public class level1 extends BasicGameState {
 	int scaredtimer=0;
 	int scaredflag=0;
 	int mazescared=0;
-	int winstate=244;
+	//int winstate=244;
 	int fruittiley=17;
 	int fruittilex=14;
 	int fruittimer=25000;
@@ -76,6 +76,14 @@ public class level1 extends BasicGameState {
 	int inkydeadflag=0;
 	int pinkydeadflag=0;
 	int clydedeadflag=0;
+	int animationrightflag=0;
+	int animationleftflag=0;
+	int animationupflag=0;
+	int animationdownflag=0;
+	int removeflaginky=0;
+	int removeflagclyde=0;
+	int removeflagblinky=0;
+	int removeflagpinky=0;
 	//use render instead
 
 	@Override
@@ -182,7 +190,7 @@ public class level1 extends BasicGameState {
 		 
 		 //add all of blinkys and other ghost starting variables
 			
-			key=0;
+			key=3;
 			previousx=0;
 			previousy=0;
 			tileup=0;
@@ -225,6 +233,52 @@ public class level1 extends BasicGameState {
 			pinkydeadflag=0;
 			clydedeadflag=0;
 			statecounter=30000;
+			
+			blinkydeadflag=0;
+			inkydeadflag=0;
+			pinkydeadflag=0;
+			clydedeadflag=0;
+			animationrightflag=0;
+			animationleftflag=0;
+			animationupflag=0;
+			animationdownflag=0;
+			removeflaginky=0;
+			removeflagclyde=0;
+			removeflagblinky=0;
+			removeflagpinky=0;
+			
+			
+			pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+			pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+			pg.blinky.removeAnimation(pg.blinky.Blinkright);
+			pg.blinky.removeAnimation(pg.blinky.Blinkup);
+			pg.blinky.removeAnimation(pg.blinky.Blinkani);
+			pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+			pg.clyde.removeAnimation(pg.clyde.clydedead);
+			pg.clyde.removeAnimation(pg.clyde.clydescared);
+			pg.clyde.removeAnimation(pg.clyde.clyderight);
+			pg.clyde.removeAnimation(pg.clyde.clydeup);
+			pg.clyde.removeAnimation(pg.clyde.clydeani);
+			pg.clyde.removeAnimation(pg.clyde.clydedown);
+			pg.inky.removeAnimation(pg.inky.inkdead);
+			pg.inky.removeAnimation(pg.inky.inkscared);
+			pg.inky.removeAnimation(pg.inky.inkright);
+			pg.inky.removeAnimation(pg.inky.inkup);
+			pg.inky.removeAnimation(pg.inky.inkani);
+			pg.inky.removeAnimation(pg.inky.inkdown);
+			pg.pinky.removeAnimation(pg.pinky.pinkdead);
+			pg.pinky.removeAnimation(pg.pinky.pinkscared);
+			pg.pinky.removeAnimation(pg.pinky.pinkright);
+			pg.pinky.removeAnimation(pg.pinky.pinkup);
+			pg.pinky.removeAnimation(pg.pinky.pinkani);
+			pg.pinky.removeAnimation(pg.pinky.pinkdown);
+			pg.inky.addAnimation(pg.inky.inkani);
+			pg.pinky.addAnimation(pg.pinky.pinkani);
+			pg.clyde.addAnimation(pg.clyde.clydeani);
+			pg.inky.deadflag=0;
+			pg.pinky.deadflag=0;
+			pg.clyde.deadflag=0;
+			pg.blinky.deadflag=0;
 		
 	}
 
@@ -322,11 +376,10 @@ public class level1 extends BasicGameState {
 					if(blinkydeadflag==0){
 						pg.score+=300;
 						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
-						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
-							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
-						}
 					}
 					blinkydeadflag=1;
+					pg.blinky.scaredflag=0;
+					pg.blinky.deadflag=1;
 					
 				}else{
 					pg.winx=pacx;
@@ -343,11 +396,10 @@ public class level1 extends BasicGameState {
 					if(clydedeadflag==0){
 						pg.score+=300;
 						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
-						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
-							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
-						}
 					}
 					clydedeadflag=1;
+					pg.clyde.scaredflag=0;
+					pg.clyde.deadflag=1;
 					
 				}else{
 					pg.winx=pacx;
@@ -364,11 +416,11 @@ public class level1 extends BasicGameState {
 					if(pinkydeadflag==0){
 						pg.score+=300;
 						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
-						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
-							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
-						}
 					}
 					pinkydeadflag=1;
+					pg.pinky.scaredflag=0;
+					pg.pinky.deadflag=1;
+					
 					
 				}else{
 					pg.winx=pacx;
@@ -385,11 +437,10 @@ public class level1 extends BasicGameState {
 					if(inkydeadflag==0){
 						pg.score+=300;
 						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
-						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
-							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
-						}
 					}
 					inkydeadflag=1;
+					pg.inky.scaredflag=0;
+					pg.inky.deadflag=1;
 					
 				}else{
 					pg.winx=pacx;
@@ -401,15 +452,7 @@ public class level1 extends BasicGameState {
 		}
 		
 		
-		if(input.isKeyPressed(Input.KEY_T) ){
-			System.out.println(currenttilex +","+ currenttiley + " Maze element: "+ pg.maze[currenttiley][currenttilex]);
-			System.out.println("LEFT"+ " Maze element: "+ pg.maze[currenttiley][currenttilex-1]);
-			System.out.println("RIGHT"+ " Maze element: "+ pg.maze[currenttiley][currenttilex+1]);
-			System.out.println("DOWN"+ " Maze element: "+ pg.maze[currenttiley+1][currenttilex]);
-			System.out.println("UP"+ " Maze element: "+ pg.maze[currenttiley-1][currenttilex]);
-			System.out.println("desired "+desired);
-			System.out.println("current "+current);
-		}
+		
 		
 		
 	
@@ -438,7 +481,7 @@ public class level1 extends BasicGameState {
 			
 
 		
-		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) )  ){
+		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) || key==3 )  ){
 			desired=3;
 			System.out.println("A");
 			this.move(desired);
@@ -481,12 +524,16 @@ public class level1 extends BasicGameState {
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
-					winstate--;
+					pg.winstatelvl1--;
 					pg.score+=10;
 				}
 				else if(check==0 && mazescared==2){
 						
 						scaredflag=1;
+						pg.blinky.scaredflag=1;
+						pg.clyde.scaredflag=1;
+						pg.inky.scaredflag=1;
+						pg.pinky.scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
 						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
@@ -498,7 +545,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
-						winstate--;
+						pg.winstatelvl1--;
 						pg.score+=50;
 				}
 				else if(check == 0 && mazescared==8){
@@ -525,12 +572,16 @@ public class level1 extends BasicGameState {
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
-					winstate--;
+					pg.winstatelvl1--;
 					pg.score+=10;
 				}
 				else if(check == 0 && mazescared == 2){
 						
 						scaredflag=1;
+						pg.blinky.scaredflag=1;
+						pg.clyde.scaredflag=1;
+						pg.inky.scaredflag=1;
+						pg.pinky.scaredflag=1;
 							ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
 							if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
@@ -542,7 +593,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
-						winstate--;
+						pg.winstatelvl1--;
 						pg.score+=50;
 				}
 				else if(check == 0 && mazescared==8){
@@ -566,12 +617,16 @@ public class level1 extends BasicGameState {
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
-					winstate--;
+					pg.winstatelvl1--;
 					pg.score+=10;
 				}
 				else if(check==0 && mazescared==2){
 						
 						scaredflag=1;
+						pg.blinky.scaredflag=1;
+						pg.clyde.scaredflag=1;
+						pg.inky.scaredflag=1;
+						pg.pinky.scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
 						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
@@ -582,7 +637,7 @@ public class level1 extends BasicGameState {
 							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 							}
 						scaredtimer=4000;
-						winstate--;
+						pg.winstatelvl1--;
 						pg.score+=50;
 				}
 				else if(check == 0 && mazescared==8){
@@ -608,12 +663,16 @@ public class level1 extends BasicGameState {
 						ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
 						
 					}
-					winstate--;
+					pg.winstatelvl1--;
 					pg.score+=10;
 				}
 				else if(check==0 && mazescared==2){
 						
 						scaredflag=1;
+						pg.blinky.scaredflag=1;
+						pg.clyde.scaredflag=1;
+						pg.inky.scaredflag=1;
+						pg.pinky.scaredflag=1;
 						ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
 						if(ResourceManager.getSound(PacManGame.Scared_Scared_RSC).playing()==false)
 							ResourceManager.getSound(PacManGame.Scared_Scared_RSC).loop();
@@ -625,7 +684,7 @@ public class level1 extends BasicGameState {
 							
 						}
 						scaredtimer=4000;
-						winstate--;
+						pg.winstatelvl1--;
 						pg.score+=50;
 				}
 				else if(check == 0 && mazescared==8){
@@ -746,6 +805,7 @@ public class level1 extends BasicGameState {
 			pg.blinky.choice(14, 14, pg);
 			if(pg.blinky.currenttilex==14 && pg.blinky.currenttiley==14){
 				blinkydeadflag=0;
+				pg.blinky.deadflag=0;
 			}
 		}
 		
@@ -803,6 +863,7 @@ public class level1 extends BasicGameState {
 			pg.inky.choice(14, 14, pg);
 			if(pg.inky.currenttilex==14 && pg.inky.currenttiley==14){
 				inkydeadflag=0;
+				pg.inky.deadflag=0;
 			}
 		}
 		
@@ -857,6 +918,7 @@ public class level1 extends BasicGameState {
 			pg.pinky.choice(14, 14, pg);
 			if(pg.pinky.currenttilex==14 && pg.pinky.currenttiley==14){
 				pinkydeadflag=0;
+				pg.pinky.deadflag=0;
 			}
 		}
 		
@@ -910,6 +972,7 @@ public class level1 extends BasicGameState {
 			pg.clyde.choice(14, 14, pg);
 			if(pg.clyde.currenttilex==14 && pg.clyde.currenttiley==14){
 				clydedeadflag=0;
+				pg.clyde.deadflag=0;
 			}
 		}
 		
@@ -920,11 +983,15 @@ public class level1 extends BasicGameState {
 			ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
 			ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
 			scaredflag=0;
+			pg.blinky.scaredflag=0;
+			pg.inky.scaredflag=0;
+			pg.clyde.scaredflag=0;
+			pg.pinky.scaredflag=0;
 			//mazescared=0;
 			
 		}
 		
-		if(winstate==0){
+		if(pg.winstatelvl1==0){
 			pg.winx=pacx;
 			pg.winy=pacy;
 			this.winstate();
@@ -958,6 +1025,16 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			if(pg.maze[mazey][mazex-1]!=1){
+				if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.pacman.removeAnimation(pg.pacman.PacManDown);
+					pg.pacman.removeAnimation(pg.pacman.PacManAni);
+					pg.pacman.removeAnimation(pg.pacman.PacManUp);
+					pg.pacman.addAnimation(pg.pacman.PacManLeft);
+					animationleftflag=1;
+				}
 				state=1;
 				mazescared = pg.maze[mazey][mazex-1];
 				nextmazex=mazex-1;
@@ -976,6 +1053,16 @@ public class level1 extends BasicGameState {
 		
 		if(desired==1){
 			if(pg.maze[mazey-1][mazex]!=1){
+				if(animationupflag==0){
+					animationdownflag=0;
+					animationleftflag=0;
+					animationrightflag=0;
+					pg.pacman.removeAnimation(pg.pacman.PacManDown);
+					pg.pacman.removeAnimation(pg.pacman.PacManAni);
+					pg.pacman.removeAnimation(pg.pacman.PacManLeft);
+					pg.pacman.addAnimation(pg.pacman.PacManUp);
+					animationupflag=1;
+				}
 				state=3;
 				mazescared = pg.maze[mazey-1][mazex];
 				nextmazex=mazex;
@@ -995,6 +1082,16 @@ public class level1 extends BasicGameState {
 		
 		if(desired==2){
 			if(pg.maze[mazey+1][mazex]!=1){
+				if(animationdownflag==0){
+					animationleftflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.pacman.removeAnimation(pg.pacman.PacManUp);
+					pg.pacman.removeAnimation(pg.pacman.PacManLeft);
+					pg.pacman.removeAnimation(pg.pacman.PacManAni);
+					pg.pacman.addAnimation(pg.pacman.PacManDown);
+					animationdownflag=1;
+				}
 				state=4;
 				mazescared = pg.maze[mazey+1][mazex];
 				nextmazex=mazex;
@@ -1020,6 +1117,16 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			if(pg.maze[mazey][mazex+1]!=1){
+				if(animationrightflag==0){
+					animationdownflag=0;
+					animationleftflag=0;
+					animationupflag=0;
+					pg.pacman.removeAnimation(pg.pacman.PacManLeft);
+					pg.pacman.removeAnimation(pg.pacman.PacManUp);
+					pg.pacman.removeAnimation(pg.pacman.PacManDown);
+					pg.pacman.addAnimation(pg.pacman.PacManAni);
+					animationrightflag=1;
+				}
 				state=2;
 				mazescared = pg.maze[mazey][mazex+1];
 				nextmazex=mazex+1;

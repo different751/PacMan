@@ -19,6 +19,9 @@ import org.newdawn.slick.Animation;
 class PacManObj extends Entity {
 	public Animation PacManAni;
 	public Animation PacMandeath;
+	public Animation PacManLeft;
+	public Animation PacManDown;
+	public Animation PacManUp;
 	private int countdown;
 	private Vector velocity;
 	private int nexttile;
@@ -28,8 +31,14 @@ class PacManObj extends Entity {
 		super(x,y);
 		PacManAni = new Animation(ResourceManager.getSpriteSheet(PacManGame.PACMAN_PACMAN_RSC, 28, 28),75);
 		PacMandeath = new Animation(ResourceManager.getSpriteSheet(PacManGame.DE_DE_RSC, 28, 28),240);
-		addAnimation(PacManAni);
+		PacManLeft = new Animation (ResourceManager.getSpriteSheet(PacManGame.PML_PML_RSC, 28, 28),75);
+		PacManDown = new Animation (ResourceManager.getSpriteSheet(PacManGame.PMD_PMD_RSC, 28, 28),75);
+		PacManUp = new Animation (ResourceManager.getSpriteSheet(PacManGame.PMU_PMU_RSC, 28, 28),75);
+		//addAnimation(PacManLeft);
 		PacManAni.setLooping(true);
+		PacManLeft.setLooping(true);
+		PacManDown.setLooping(true);
+		PacManUp.setLooping(true);
 		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC));
 		countdown=0;
 		velocity= new Vector(vx,vy);

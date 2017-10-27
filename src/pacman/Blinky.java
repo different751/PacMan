@@ -23,6 +23,11 @@ import org.newdawn.slick.Animation;
  */
 class Blinky extends Entity {
 	public Animation Blinkani;
+	public Animation Blinkright;
+	public Animation Blinkdown;
+	public Animation Blinkup;
+	public Animation Blinkscared;
+	public Animation Blinkdead;
 	public int countdown;
 	public int state=0;
 	public Vector velocity;
@@ -37,15 +42,33 @@ class Blinky extends Entity {
 	public int desired=0;
 	public int current=0;
 	public int key=0;
+	public int animationleftflag=0;
+	public int animationrightflag=0;
+	public int animationdownflag=0;
+	public int animationupflag=0;
+	public int scaredflag=0;
+	public int deadflag=0;
 	Stack<Node> officalstack = new Stack<Node>();
 	public Node officalnode = null;
 
 	public Blinky(final float x, final float y) {
 		super(x,y);
 		Blinkani = new Animation(ResourceManager.getSpriteSheet(PacManGame.BL_BL_RSC, 28, 28),100);
-		addAnimation(Blinkani);
+		Blinkup = new Animation(ResourceManager.getSpriteSheet(PacManGame.BU_BU_RSC, 28, 28),100);
+		Blinkdown = new Animation(ResourceManager.getSpriteSheet(PacManGame.BD_BD_RSC, 28, 28),100);
+		Blinkright = new Animation(ResourceManager.getSpriteSheet(PacManGame.BR_BR_RSC, 28, 28),100);
+		Blinkscared = new Animation(ResourceManager.getSpriteSheet(PacManGame.GS_GS_RSC, 28, 28),100);
+		Blinkdead = new Animation(ResourceManager.getSpriteSheet(PacManGame.GD_GD_RSC, 28, 28),100);
+		
+		
+		//addAnimation(Blinkani);
 		Blinkani.setLooping(true);
-		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC));
+		Blinkup.setLooping(true);
+		Blinkdown.setLooping(true);
+		Blinkright.setLooping(true);
+		Blinkscared.setLooping(true);
+		Blinkdead.setLooping(true);
+		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PA_PACMAN_RSC));
 		countdown=0;
 		//ResourceManager.getSound(BounceGame.BANG_EXPLOSIONSND_RSC).play();
 	}
@@ -63,6 +86,32 @@ class Blinky extends Entity {
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+				pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+				pg.blinky.removeAnimation(pg.blinky.Blinkright);
+				pg.blinky.removeAnimation(pg.blinky.Blinkup);
+				pg.blinky.removeAnimation(pg.blinky.Blinkani);
+				if(scaredflag==0 && deadflag==0){
+					pg.blinky.addAnimation(pg.blinky.Blinkdown);
+				}
+				if(scaredflag==1){
+					pg.blinky.addAnimation(pg.blinky.Blinkscared);
+				}
+				
+				if(deadflag==1){
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					pg.blinky.addAnimation(pg.blinky.Blinkdead);
+				}
+				
+				animationdownflag=1;
+			}
 				desired =2;
 				this.move(pg);
 				System.out.println("down");
@@ -70,6 +119,33 @@ class Blinky extends Entity {
 	
 		 if(currenttilex-officalnode.x==-1){
 			//move right
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					if(scaredflag==0 && deadflag==0){
+					pg.blinky.addAnimation(pg.blinky.Blinkright);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+			 		}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					
+					animationrightflag=1;
+				}
+			
 			
 			desired =4;
 			this.move(pg);
@@ -78,6 +154,33 @@ class Blinky extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					if(scaredflag==0 && deadflag==0){
+						pg.blinky.addAnimation(pg.blinky.Blinkup);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move(pg);
@@ -87,39 +190,38 @@ class Blinky extends Entity {
 	System.out.println(currenttilex-officalnode.y);
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					if(scaredflag==0 && deadflag==0){
+						pg.blinky.addAnimation(pg.blinky.Blinkani);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					animationleftflag=1;
+				}
 				desired=3;
 				this.move(pg);
 				System.out.println("left");
 
 		}
 			
-			/*if(currenttiley < mazey){
-				//move down
-					desired =2;
-					this.move(pg);
-			}
-		
-			 if(currenttilex < mazex){
-				//move right
-				
-				desired =4;
-				this.move(pg);
-			}
-		
-			 if(currenttiley> mazey){
-				//move up
-				  
-					desired=1;
-					this.move(pg);
-				
-			}
-		
-			  if(currenttilex > mazex){
-				//move left
-					desired=3;
-					this.move(pg);
-	
-			}*/
+			
 		}
 		
 		if(state==1){
@@ -183,9 +285,36 @@ class Blinky extends Entity {
 			}
 			
 		System.out.println(officalnode.x + " , "+ officalnode.y);
+		
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+				pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+				pg.blinky.removeAnimation(pg.blinky.Blinkright);
+				pg.blinky.removeAnimation(pg.blinky.Blinkup);
+				pg.blinky.removeAnimation(pg.blinky.Blinkani);
+				if(scaredflag==0 && deadflag==0){
+					pg.blinky.addAnimation(pg.blinky.Blinkdown);
+				}
+				if(scaredflag==1){
+					pg.blinky.addAnimation(pg.blinky.Blinkscared);
+				}
+				
+				if(deadflag==1){
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					pg.blinky.addAnimation(pg.blinky.Blinkdead);
+				}
+				
+				animationdownflag=1;
+			}
 				desired =2;
 				this.move2(pg);
 				System.out.println("down");
@@ -193,6 +322,32 @@ class Blinky extends Entity {
 	
 		 if(currenttilex-officalnode.x==-1){
 			//move right
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					if(scaredflag==0 && deadflag==0){
+					pg.blinky.addAnimation(pg.blinky.Blinkright);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+			 		}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					
+					animationrightflag=1;
+				}
 			
 			desired =4;
 			this.move2(pg);
@@ -201,6 +356,33 @@ class Blinky extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkani);
+					if(scaredflag==0 && deadflag==0){
+						pg.blinky.addAnimation(pg.blinky.Blinkup);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move2(pg);
@@ -210,6 +392,31 @@ class Blinky extends Entity {
 	System.out.println(currenttilex-officalnode.y);
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.blinky.removeAnimation(pg.blinky.Blinkdead);
+					pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+					pg.blinky.removeAnimation(pg.blinky.Blinkdown);
+					pg.blinky.removeAnimation(pg.blinky.Blinkright);
+					pg.blinky.removeAnimation(pg.blinky.Blinkup);
+					if(scaredflag==0 && deadflag==0){
+						pg.blinky.addAnimation(pg.blinky.Blinkani);
+					}
+					if(scaredflag==1){
+						pg.blinky.addAnimation(pg.blinky.Blinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.blinky.removeAnimation(pg.blinky.Blinkscared);
+						pg.blinky.removeAnimation(pg.blinky.Blinkright);
+						pg.blinky.removeAnimation(pg.blinky.Blinkup);
+						pg.blinky.removeAnimation(pg.blinky.Blinkani);
+						pg.blinky.addAnimation(pg.blinky.Blinkdead);
+					}
+					animationleftflag=1;
+				}
 				desired=3;
 				this.move2(pg);
 				System.out.println("left");

@@ -22,7 +22,12 @@ import org.newdawn.slick.Animation;
  * them at that point.
  */
 class Clyde extends Entity {
-	public Animation inkani;
+	public Animation clydeani;
+	public Animation clyderight;
+	public Animation clydedown;
+	public Animation clydeup;
+	public Animation clydescared;
+	public Animation clydedead;
 	public int countdown;
 	public int state=-1;
 	public Vector velocity;
@@ -38,14 +43,30 @@ class Clyde extends Entity {
 	public int current=0;
 	public int key=0;
 	public int outcount=87;
+	public int animationleftflag=0;
+	public int animationrightflag=0;
+	public int animationdownflag=0;
+	public int animationupflag=0;
+	public int scaredflag=0;
+	public int deadflag=0;
 	Stack<Node> officalstack = new Stack<Node>();
 	public Node officalnode = null;
 
 	public Clyde(final float x, final float y) {
 		super(x,y);
-		inkani = new Animation(ResourceManager.getSpriteSheet(PacManGame.CL_CL_RSC, 28, 28),100);
-		addAnimation(inkani);
-		inkani.setLooping(true);
+		clydeani = new Animation(ResourceManager.getSpriteSheet(PacManGame.CL_CL_RSC, 28, 28),100);
+		clydeup = new Animation(ResourceManager.getSpriteSheet(PacManGame.CU_CU_RSC, 28, 28),100);
+		clydedown = new Animation(ResourceManager.getSpriteSheet(PacManGame.CD_CD_RSC, 28, 28),100);
+		clyderight = new Animation(ResourceManager.getSpriteSheet(PacManGame.CR_CR_RSC, 28, 28),100);
+		clydescared = new Animation(ResourceManager.getSpriteSheet(PacManGame.GS_GS_RSC, 28, 28),100);
+		clydedead = new Animation(ResourceManager.getSpriteSheet(PacManGame.GD_GD_RSC, 28, 28),100);
+		//addAnimation(clydeani);
+		clydeani.setLooping(true);
+		clydeup.setLooping(true);
+		clydedown.setLooping(true);
+		clyderight.setLooping(true);
+		clydescared.setLooping(true);
+		clydedead.setLooping(true);
 		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC));
 		countdown=0;
 		//ResourceManager.getSound(BounceGame.BANG_EXPLOSIONSND_RSC).play();
@@ -65,6 +86,32 @@ class Clyde extends Entity {
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.clyde.removeAnimation(pg.clyde.clydedead);
+				pg.clyde.removeAnimation(pg.clyde.clydescared);
+				pg.clyde.removeAnimation(pg.clyde.clyderight);
+				pg.clyde.removeAnimation(pg.clyde.clydeup);
+				pg.clyde.removeAnimation(pg.clyde.clydeani);
+				if(scaredflag==0 && deadflag==0){
+					pg.clyde.addAnimation(pg.clyde.clydedown);
+				}
+				if(scaredflag==1){
+					pg.clyde.addAnimation(pg.clyde.clydescared);
+				}
+				
+				if(deadflag==1){
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					pg.clyde.addAnimation(pg.clyde.clydedead);
+				}
+				
+				animationdownflag=1;
+			}
 				desired =2;
 				this.move(pg);
 				System.out.println("down");
@@ -72,6 +119,32 @@ class Clyde extends Entity {
 	
 		 if(currenttilex-officalnode.x==-1){
 			//move right
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					if(scaredflag==0 && deadflag==0){
+					pg.clyde.addAnimation(pg.clyde.clyderight);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+			 		}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					
+					animationrightflag=1;
+				}
 			
 			desired =4;
 			this.move(pg);
@@ -80,6 +153,33 @@ class Clyde extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					if(scaredflag==0 && deadflag==0){
+						pg.clyde.addAnimation(pg.clyde.clydeup);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+					}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move(pg);
@@ -89,6 +189,31 @@ class Clyde extends Entity {
 
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					if(scaredflag==0 && deadflag==0){
+						pg.clyde.addAnimation(pg.clyde.clydeani);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+					}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					animationleftflag=1;
+				}
 				desired=3;
 				this.move(pg);
 				System.out.println("left");
@@ -161,6 +286,32 @@ class Clyde extends Entity {
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.clyde.removeAnimation(pg.clyde.clydedead);
+				pg.clyde.removeAnimation(pg.clyde.clydescared);
+				pg.clyde.removeAnimation(pg.clyde.clyderight);
+				pg.clyde.removeAnimation(pg.clyde.clydeup);
+				pg.clyde.removeAnimation(pg.clyde.clydeani);
+				if(scaredflag==0 && deadflag==0){
+					pg.clyde.addAnimation(pg.clyde.clydedown);
+				}
+				if(scaredflag==1){
+					pg.clyde.addAnimation(pg.clyde.clydescared);
+				}
+				
+				if(deadflag==1){
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					pg.clyde.addAnimation(pg.clyde.clydedead);
+				}
+				
+				animationdownflag=1;
+			}
 				desired =2;
 				this.move2(pg);
 				System.out.println("down");
@@ -169,6 +320,33 @@ class Clyde extends Entity {
 		 if(currenttilex-officalnode.x==-1){
 			//move right
 			
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					if(scaredflag==0 && deadflag==0){
+					pg.clyde.addAnimation(pg.clyde.clyderight);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+			 		}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					
+					animationrightflag=1;
+				}
+			
 			desired =4;
 			this.move2(pg);
 			System.out.println("right");
@@ -176,6 +354,33 @@ class Clyde extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeani);
+					if(scaredflag==0 && deadflag==0){
+						pg.clyde.addAnimation(pg.clyde.clydeup);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+					}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move2(pg);
@@ -185,6 +390,32 @@ class Clyde extends Entity {
 	System.out.println(currenttilex-officalnode.y);
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.clyde.removeAnimation(pg.clyde.clydedead);
+					pg.clyde.removeAnimation(pg.clyde.clydescared);
+					pg.clyde.removeAnimation(pg.clyde.clydedown);
+					pg.clyde.removeAnimation(pg.clyde.clyderight);
+					pg.clyde.removeAnimation(pg.clyde.clydeup);
+					if(scaredflag==0 && deadflag==0){
+						pg.clyde.addAnimation(pg.clyde.clydeani);
+					}
+					if(scaredflag==1){
+						pg.clyde.addAnimation(pg.clyde.clydescared);
+					}
+					
+					if(deadflag==1){
+						pg.clyde.removeAnimation(pg.clyde.clydescared);
+						pg.clyde.removeAnimation(pg.clyde.clyderight);
+						pg.clyde.removeAnimation(pg.clyde.clydeup);
+						pg.clyde.removeAnimation(pg.clyde.clydeani);
+						pg.clyde.addAnimation(pg.clyde.clydedead);
+					}
+					animationleftflag=1;
+				}
+			  
 				desired=3;
 				this.move2(pg);
 				System.out.println("left");

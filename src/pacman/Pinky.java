@@ -22,7 +22,12 @@ import org.newdawn.slick.Animation;
  * them at that point.
  */
 class Pinky extends Entity {
-	public Animation inkani;
+	public Animation pinkani;
+	public Animation pinkright;
+	public Animation pinkdown;
+	public Animation pinkup;
+	public Animation pinkscared;
+	public Animation pinkdead;
 	public int countdown;
 	public int state=-1;
 	public Vector velocity;
@@ -38,14 +43,30 @@ class Pinky extends Entity {
 	public int current=0;
 	public int key=0;
 	public int outcount=49;
+	public int animationleftflag=0;
+	public int animationrightflag=0;
+	public int animationdownflag=0;
+	public int animationupflag=0;
+	public int scaredflag=0;
+	public int deadflag=0;
 	Stack<Node> officalstack = new Stack<Node>();
 	public Node officalnode = null;
 
 	public Pinky(final float x, final float y) {
 		super(x,y);
-		inkani = new Animation(ResourceManager.getSpriteSheet(PacManGame.PL_PL_RSC, 28, 28),100);
-		addAnimation(inkani);
-		inkani.setLooping(true);
+		pinkani = new Animation(ResourceManager.getSpriteSheet(PacManGame.PL_PL_RSC, 28, 28),100);
+		pinkup = new Animation(ResourceManager.getSpriteSheet(PacManGame.PU_PU_RSC, 28, 28),100);
+		pinkdown = new Animation(ResourceManager.getSpriteSheet(PacManGame.PD_PD_RSC, 28, 28),100);
+		pinkright = new Animation(ResourceManager.getSpriteSheet(PacManGame.PR_PR_RSC, 28, 28),100);
+		pinkscared = new Animation(ResourceManager.getSpriteSheet(PacManGame.GS_GS_RSC, 28, 28),100);
+		pinkdead = new Animation(ResourceManager.getSpriteSheet(PacManGame.GD_GD_RSC, 28, 28),100);
+		//addAnimation(pinkani);
+		pinkup.setLooping(true);
+		pinkdown.setLooping(true);
+		pinkright.setLooping(true);
+		pinkscared.setLooping(true);
+		pinkdead.setLooping(true);
+		pinkani.setLooping(true);
 		//addImageWithBoundingBox(ResourceManager.getImage(PacManGame.PACMAN_PACMAN_RSC));
 		countdown=0;
 		//ResourceManager.getSound(BounceGame.BANG_EXPLOSIONSND_RSC).play();
@@ -65,6 +86,33 @@ class Pinky extends Entity {
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.pinky.removeAnimation(pg.pinky.pinkdead);
+				pg.pinky.removeAnimation(pg.pinky.pinkscared);
+				pg.pinky.removeAnimation(pg.pinky.pinkright);
+				pg.pinky.removeAnimation(pg.pinky.pinkup);
+				pg.pinky.removeAnimation(pg.pinky.pinkani);
+				if(scaredflag==0 && deadflag==0){
+					pg.pinky.addAnimation(pg.pinky.pinkdown);
+				}
+				if(scaredflag==1){
+					pg.pinky.addAnimation(pg.pinky.pinkscared);
+				}
+				
+				if(deadflag==1){
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					pg.pinky.addAnimation(pg.pinky.pinkdead);
+				}
+				
+				animationdownflag=1;
+			}
+
 				desired =2;
 				this.move(pg);
 				System.out.println("down");
@@ -72,6 +120,32 @@ class Pinky extends Entity {
 	
 		 if(currenttilex-officalnode.x==-1){
 			//move right
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					if(scaredflag==0 && deadflag==0){
+					pg.pinky.addAnimation(pg.pinky.pinkright);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+			 		}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					
+					animationrightflag=1;
+				}
 			
 			desired =4;
 			this.move(pg);
@@ -80,6 +154,33 @@ class Pinky extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					if(scaredflag==0 && deadflag==0){
+						pg.pinky.addAnimation(pg.pinky.pinkup);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move(pg);
@@ -89,6 +190,31 @@ class Pinky extends Entity {
 
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					if(scaredflag==0 && deadflag==0){
+						pg.pinky.addAnimation(pg.pinky.pinkani);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					animationleftflag=1;
+				}
 				desired=3;
 				this.move(pg);
 				System.out.println("left");
@@ -161,6 +287,32 @@ class Pinky extends Entity {
 			
 		if(currenttiley-officalnode.y==-1){
 			//move down
+			if(animationdownflag==0){
+				animationrightflag=0;
+				animationupflag=0;
+				animationleftflag=0;
+				pg.pinky.removeAnimation(pg.pinky.pinkdead);
+				pg.pinky.removeAnimation(pg.pinky.pinkscared);
+				pg.pinky.removeAnimation(pg.pinky.pinkright);
+				pg.pinky.removeAnimation(pg.pinky.pinkup);
+				pg.pinky.removeAnimation(pg.pinky.pinkani);
+				if(scaredflag==0 && deadflag==0){
+					pg.pinky.addAnimation(pg.pinky.pinkdown);
+				}
+				if(scaredflag==1){
+					pg.pinky.addAnimation(pg.pinky.pinkscared);
+				}
+				
+				if(deadflag==1){
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					pg.pinky.addAnimation(pg.pinky.pinkdead);
+				}
+				
+				animationdownflag=1;
+			}
 				desired =2;
 				this.move2(pg);
 				System.out.println("down");
@@ -168,6 +320,33 @@ class Pinky extends Entity {
 	
 		 if(currenttilex-officalnode.x==-1){
 			//move right
+			 
+			 if(animationrightflag==0){
+					animationdownflag=0;
+					animationupflag=0;
+					animationleftflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					if(scaredflag==0 && deadflag==0){
+					pg.pinky.addAnimation(pg.pinky.pinkright);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+			 		}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					
+					animationrightflag=1;
+				}
 			
 			desired =4;
 			this.move2(pg);
@@ -176,6 +355,33 @@ class Pinky extends Entity {
 	
 		 if(currenttiley-officalnode.y==1){
 			//move up
+			 if(animationupflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationleftflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkani);
+					if(scaredflag==0 && deadflag==0){
+						pg.pinky.addAnimation(pg.pinky.pinkup);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					
+					
+					animationupflag=1;
+				}
 			  
 				desired=1;
 				this.move2(pg);
@@ -185,6 +391,32 @@ class Pinky extends Entity {
 	System.out.println(currenttilex-officalnode.y);
 		  if(currenttilex-officalnode.x==1){
 			//move left
+			  if(animationleftflag==0){
+					animationdownflag=0;
+					animationrightflag=0;
+					animationupflag=0;
+					pg.pinky.removeAnimation(pg.pinky.pinkdead);
+					pg.pinky.removeAnimation(pg.pinky.pinkscared);
+					pg.pinky.removeAnimation(pg.pinky.pinkdown);
+					pg.pinky.removeAnimation(pg.pinky.pinkright);
+					pg.pinky.removeAnimation(pg.pinky.pinkup);
+					if(scaredflag==0 && deadflag==0){
+						pg.pinky.addAnimation(pg.pinky.pinkani);
+					}
+					if(scaredflag==1){
+						pg.pinky.addAnimation(pg.pinky.pinkscared);
+					}
+					
+					if(deadflag==1){
+						pg.pinky.removeAnimation(pg.pinky.pinkscared);
+						pg.pinky.removeAnimation(pg.pinky.pinkright);
+						pg.pinky.removeAnimation(pg.pinky.pinkup);
+						pg.pinky.removeAnimation(pg.pinky.pinkani);
+						pg.pinky.addAnimation(pg.pinky.pinkdead);
+					}
+					animationleftflag=1;
+				}
+			  
 				desired=3;
 				this.move2(pg);
 				System.out.println("left");
