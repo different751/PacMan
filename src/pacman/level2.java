@@ -5,6 +5,7 @@ package pacman;
 import jig.ResourceManager;
 import jig.Vector;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import org.newdawn.slick.Animation;
@@ -32,6 +33,8 @@ public class level2 extends BasicGameState {
 	Energydot enrdot = new Energydot();
 	float pacx=232;
 	float pacy=456;
+	int currentkey=3;
+	int previouskey=0;
 	int tileheight=16;
 	int tilewidth=16;
 	int currenttilex;
@@ -282,6 +285,9 @@ public class level2 extends BasicGameState {
 			pg.pinky.deadflag=0;
 			pg.clyde.deadflag=0;
 			pg.blinky.deadflag=0;
+			pg.previouskey=0;
+			pg.nextkey=0;
+			
 		
 	}
 
@@ -459,49 +465,60 @@ public class level2 extends BasicGameState {
 		
 	
 		if(state==0){
-			
 		//if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) || key==1)  ){
-		if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) )  ){
-			desired=1;
+		if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) || pg.nextkey==1)  ){
+			//desired=1;
+			//key=1;
+			pg.nextkey=1;
+	
 			System.out.println("W");
-			this.move(desired);
+			this.move(1);
 		}
 		else if(key==1){
-			this.move(desired);
+			this.move(1);
 		}
+
 			
 			
 		
-		if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN) ) ){
-			desired=2;
+		if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN)|| pg.nextkey==2) ){
+			//desired=2;
+			//key=2;
+			pg.nextkey=2;
+			
 			System.out.println("S");
-			this.move(desired);
+			this.move(2);
 		}
 		else if(key==2){
-			this.move(desired);
+			this.move(2);
 		}
+		
 			
 
 		
-		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) || key==3 )  ){
-			desired=3;
+		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT)||pg.nextkey==3)  ){
+			//desired=3;
+			//key=3;
+			pg.nextkey=3;
+			
 			System.out.println("A");
-			this.move(desired);
+			this.move(3);
 			
 		}
 		else if(key==3){
-			//System.out.println("A");
-			this.move(desired);
+			this.move(3);
 		}
 		
-		if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)) ){
-			desired=4;
+		
+		if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)||pg.nextkey==4 ) ){
+			pg.nextkey=4;
 			System.out.println("D");
-			this.move(desired);
+			this.move(4);
 		}
 		else if(key==4){
-			this.move(desired);
+			this.move(4);
 		}
+		
 			
 		}
 		
@@ -1028,7 +1045,7 @@ public class level2 extends BasicGameState {
 	}
 	
 	public void move(int desired){
-		
+		System.out.println("PREVIOUS KEY :" +pg.previouskey);
 		if(desired==3){
 			if(pg.maze2[mazey][mazex]==6){
 				state=6;
@@ -1045,9 +1062,11 @@ public class level2 extends BasicGameState {
 					pg.pacman2.removeAnimation(pg.pacman2.PacManAni);
 					pg.pacman2.removeAnimation(pg.pacman2.PacManUp);
 					pg.pacman2.addAnimation(pg.pacman2.PacManLeft);
+					pg.previouskey=key;
 					animationleftflag=1;
 				}
 				state=1;
+				
 				mazescared = pg.maze2[mazey][mazex-1];
 				nextmazex=mazex-1;
 				nextmazey=mazey;
@@ -1056,8 +1075,8 @@ public class level2 extends BasicGameState {
 				current=3;
 				return;
 			}
-			else if(current==3){
-				key=0;
+			if(current==3){
+				//key=pg.previouskey;
 				return;
 			}
 			return;
@@ -1073,6 +1092,7 @@ public class level2 extends BasicGameState {
 					pg.pacman2.removeAnimation(pg.pacman2.PacManAni);
 					pg.pacman2.removeAnimation(pg.pacman2.PacManLeft);
 					pg.pacman2.addAnimation(pg.pacman2.PacManUp);
+					pg.previouskey=key;
 					animationupflag=1;
 				}
 				state=3;
@@ -1084,8 +1104,9 @@ public class level2 extends BasicGameState {
 				current=1;
 				return;
 			}
-			else if(current==1){
-				key=0;
+			if(current==1){
+				//key=0;
+				//key=pg.previouskey;
 				return;
 			}
 			
@@ -1102,6 +1123,7 @@ public class level2 extends BasicGameState {
 					pg.pacman2.removeAnimation(pg.pacman2.PacManLeft);
 					pg.pacman2.removeAnimation(pg.pacman2.PacManAni);
 					pg.pacman2.addAnimation(pg.pacman2.PacManDown);
+					pg.previouskey=key;
 					animationdownflag=1;
 				}
 				state=4;
@@ -1113,8 +1135,9 @@ public class level2 extends BasicGameState {
 				current=2;
 				return;
 			}
-			else if(current==2){
-				key=0;
+			if(current==2){
+				//key=0;
+				//key=pg.previouskey;
 				return;
 			}
 			return;
@@ -1137,6 +1160,7 @@ public class level2 extends BasicGameState {
 					pg.pacman2.removeAnimation(pg.pacman2.PacManUp);
 					pg.pacman2.removeAnimation(pg.pacman2.PacManDown);
 					pg.pacman2.addAnimation(pg.pacman2.PacManAni);
+					pg.previouskey=key;
 					animationrightflag=1;
 				}
 				
@@ -1149,8 +1173,10 @@ public class level2 extends BasicGameState {
 				current=4;
 				return;
 			}
-			else if(current==4){
-				key=0;
+			if(current==4){
+				//key=0;
+				System.out.println("HEYasdlfjaasdfkasjdfla");
+				//key=pg.previouskey;
 				return;
 			}
 			return;

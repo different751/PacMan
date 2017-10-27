@@ -24,22 +24,14 @@ __________COMPLETED__________
 **25** : add life after 3000 score
 **21** : cheat codes
 **26** : adjust animations
+**18** : tweak player movement 
 __________TO BE COMPLETED__________
-
-
-
-
-
-18 : tweak player movement  
-
-
-
 
 
 
 __________Minor Random Ideas_______
 
-MRI 3 : Need to fix bug when crossing ghost house causes death
+
 
 
 __________Optional Features_________
