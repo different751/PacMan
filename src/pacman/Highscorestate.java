@@ -30,6 +30,8 @@ public class Highscorestate extends BasicGameState {
 		intscores=new int[10];
 		timer = 8000;
 		pg = (PacManGame)game;
+		pg.lives=3;
+		
 		this.scoretoint();
 		for(int i=0;i<10;i++){
 			if(pg.score>intscores[i]){
@@ -46,6 +48,8 @@ public class Highscorestate extends BasicGameState {
 		
 		this.shiftscore();
 		this.write();
+		pg.score=0;
+		pg.i=0;
 		
 	}
 

@@ -2,6 +2,11 @@ package pacman;
 
 import jig.ResourceManager;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -40,6 +45,26 @@ class Menu extends BasicGameState {
 				pg. maze2[i][z]=pg. maze2copy[i][z];
 			}
 		}
+		
+		try {
+            FileReader filereader = new FileReader(pg.file);
+
+            BufferedReader buffreader = new BufferedReader(filereader);
+
+            while((pg.line = buffreader.readLine()) != null) {
+                pg.scorearray[pg.i]=pg.line;
+                pg.i++;
+            }   
+
+            // Always close files.
+            buffreader.close();         
+        }
+        catch(FileNotFoundException ex) {
+            System.out.println("Unable to open file");                
+        }
+        catch(IOException ex) {
+            System.out.println("Error reading file");                  
+        }
 	}
 
 	
