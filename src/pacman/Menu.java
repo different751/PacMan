@@ -44,6 +44,14 @@ class Menu extends BasicGameState {
 		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
 		ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
 		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
+		pg.pacman2.removeAnimation(pg.pacman2.PacManAni);
+		pg.pacman2.removeAnimation(pg.pacman2.PacManDown);
+		pg.pacman2.removeAnimation(pg.pacman2.PacManLeft);
+		pg.pacman2.removeAnimation(pg.pacman2.PacManUp);
+		pg.pacman.removeAnimation(pg.pacman.PacManAni);
+		pg.pacman.removeAnimation(pg.pacman.PacManDown);
+		pg.pacman.removeAnimation(pg.pacman.PacManLeft);
+		pg.pacman.removeAnimation(pg.pacman.PacManUp);
 		pg.lives=3;
 		pg.winstatelvl1=244;
 		pg.winstatelvl2=251;
