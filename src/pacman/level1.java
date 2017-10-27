@@ -67,6 +67,15 @@ public class level1 extends BasicGameState {
 	int fruit=0;
 	int secondcheck=-1;
 	int wrapflag=0;
+	int statecounter=30000;
+	int blinkystateflag=0;
+	int inkystateflag=0;
+	int pinkystateflag=0;
+	int clydestateflag=0;
+	int blinkydeadflag=0;
+	int inkydeadflag=0;
+	int pinkydeadflag=0;
+	int clydedeadflag=0;
 	//use render instead
 
 	@Override
@@ -201,6 +210,17 @@ public class level1 extends BasicGameState {
 			fruittilex=14;
 			fruittimer=25000;
 			fruit=0;
+			
+			blinkystateflag=0;
+			inkystateflag=0;
+			pinkystateflag=0;
+			clydestateflag=0;
+			statecounter=30000;
+			blinkydeadflag=0;
+			inkydeadflag=0;
+			pinkydeadflag=0;
+			clydedeadflag=0;
+			statecounter=30000;
 		
 	}
 
@@ -288,37 +308,85 @@ public class level1 extends BasicGameState {
 		
 		if(mazex==pg.blinky.getblinkmazex()){
 			if(mazey==pg.blinky.getblinkmazey() ){
-				pg.winx=pacx;
-				pg.winy=pacy;
-				pg.lives--;
-				pg.enterState(PacManGame.GAMEOVERSTATE);
+				if(scaredflag==1){
+					if(blinkydeadflag==0){
+						pg.score+=300;
+						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						}
+					}
+					blinkydeadflag=1;
+					
+				}else{
+					pg.winx=pacx;
+					pg.winy=pacy;
+					pg.lives--;
+					pg.enterState(PacManGame.GAMEOVERSTATE);
+				}
 			}
 		}
 		
 		if(mazex==pg.clyde.getclydemazex()){
 			if(mazey==pg.clyde.getclydemazey() ){
-				pg.winx=pacx;
-				pg.winy=pacy;
-				pg.lives--;
-				pg.enterState(PacManGame.GAMEOVERSTATE);
+				if(scaredflag==1){
+					if(clydedeadflag==0){
+						pg.score+=300;
+						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						}
+					}
+					clydedeadflag=1;
+					
+				}else{
+					pg.winx=pacx;
+					pg.winy=pacy;
+					pg.lives--;
+					pg.enterState(PacManGame.GAMEOVERSTATE);
+				}
 			}
 		}
 		
 		if(mazex==pg.pinky.getPinkymazex()){
 			if(mazey==pg.pinky.getPinkymazey() ){
-				pg.winx=pacx;
-				pg.winy=pacy;
-				pg.lives--;
-				pg.enterState(PacManGame.GAMEOVERSTATE);
+				if(scaredflag==1){
+					if(pinkydeadflag==0){
+						pg.score+=300;
+						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						}
+					}
+					pinkydeadflag=1;
+					
+				}else{
+					pg.winx=pacx;
+					pg.winy=pacy;
+					pg.lives--;
+					pg.enterState(PacManGame.GAMEOVERSTATE);
+				}
 			}
 		}
 		
 		if(mazex==pg.inky.getInkymazex()){
 			if(mazey==pg.inky.getInkymazey() ){
-				pg.winx=pacx;
-				pg.winy=pacy;
-				pg.lives--;
-				pg.enterState(PacManGame.GAMEOVERSTATE);
+				if(scaredflag==1){
+					if(inkydeadflag==0){
+						pg.score+=300;
+						ResourceManager.getSound(PacManGame.GDS_GDS_RSC).play();
+						if(ResourceManager.getSound(PacManGame.Waka_Waka_RSC).playing()){
+							ResourceManager.getSound(PacManGame.Waka_Waka_RSC).play();
+						}
+					}
+					inkydeadflag=1;
+					
+				}else{
+					pg.winx=pacx;
+					pg.winy=pacy;
+					pg.lives--;
+					pg.enterState(PacManGame.GAMEOVERSTATE);
+				}
 			}
 		}
 		
@@ -615,10 +683,54 @@ public class level1 extends BasicGameState {
 		
 		
 		
+		statecounter-=delta;
+		if(statecounter>10000 && scaredflag==0 && blinkydeadflag==0){
+			pg.blinky.choice(mazex, mazey, pg);
+		}
 		
+		if( statecounter<=10000 && blinkystateflag==0 && scaredflag==0 && blinkydeadflag==0){
+				pg.blinky.choice(26, 1, pg);
+				if(pg.blinky.currenttilex==26 && pg.blinky.currenttiley==1){
+					blinkystateflag=1;
+				}
+			
+		}
 		
+		if(statecounter<=10000 && blinkystateflag==1 && scaredflag==0 && blinkydeadflag==0){
+			pg.blinky.choice(21, 5, pg);
+			if(pg.blinky.currenttilex==21 && pg.blinky.currenttiley==5){
+				blinkystateflag=0;
+			}
+		}
 		
-		pg.blinky.choice(mazex, mazey, pg);
+		if(scaredflag==1){
+			if(blinkystateflag==0 && blinkydeadflag==0){
+				pg.blinky.choice(26, 1, pg);
+				if(pg.blinky.currenttilex==26 && pg.blinky.currenttiley==1){
+					blinkystateflag=1;
+				}
+			
+			}
+		
+			if(blinkystateflag==1 && blinkydeadflag==0){
+			pg.blinky.choice(1, 29, pg);
+				if(pg.blinky.currenttilex==1 && pg.blinky.currenttiley==29){
+					blinkystateflag=0;
+				}
+			}
+
+		}
+		
+		if(blinkydeadflag==1){
+			pg.blinky.choice(14, 14, pg);
+			if(pg.blinky.currenttilex==14 && pg.blinky.currenttiley==14){
+				blinkydeadflag=0;
+			}
+		}
+		
+		if(statecounter<0){
+			statecounter=30000;
+		}
 		
 		timer -=delta;
 		if(timer<12000){
@@ -626,26 +738,158 @@ public class level1 extends BasicGameState {
 			inkyflag=1;
 		}
 		
-		if(inkyflag==1){
-			pg.inky.choice(mazex, mazey, pg);
+		if(inkyflag==1 && scaredflag==0 && blinkydeadflag==0){
+			if(statecounter>10000){
+				pg.inky.choice(mazex, mazey, pg);
+			}
+			
+			if( statecounter<=10000 && inkystateflag==0 && scaredflag==0 && blinkydeadflag==0){
+					pg.inky.choice(26, 29, pg);
+					if(pg.inky.currenttilex==26 && pg.inky.currenttiley==29){
+						inkystateflag=1;
+					}
+				
+			}
+			
+			if(statecounter<=10000 && inkystateflag==1 && scaredflag==0 && blinkydeadflag==0){
+				pg.inky.choice(19, 23, pg);
+				if(pg.inky.currenttilex==19 && pg.inky.currenttiley==23){
+					inkystateflag=0;
+				}
+			}
+			//pg.inky.choice2(mazex, mazey, pg);
 		}
+		
+		if(scaredflag==1 && inkyflag==1 && blinkydeadflag==0){
+			if(inkystateflag==0){
+				pg.inky.choice(26, 29, pg);
+				if(pg.inky.currenttilex==26 && pg.inky.currenttiley==29){
+					inkystateflag=1;
+				}
+			
+			}
+		
+			if(inkystateflag==1){
+			pg.inky.choice(1, 1, pg);
+				if(pg.inky.currenttilex==1 && pg.inky.currenttiley==1){
+					inkystateflag=0;
+				}
+			}
+			
+		}
+		
+		if(inkydeadflag==1){
+			pg.inky.choice(14, 14, pg);
+			if(pg.inky.currenttilex==14 && pg.inky.currenttiley==14){
+				inkydeadflag=0;
+			}
+		}
+		
+		
 		
 		if(timer<6000){
 			pg.pinky.movefromhome(pg);
 			pinkyflag=1;
 		}
 		
-		if(pinkyflag==1){
-			pg.pinky.choice(mazex, mazey, pg);
+		if(pinkyflag==1 && pinkydeadflag==0){
+			if(statecounter>10000 && scaredflag==0){
+				pg.pinky.choice(mazex, mazey, pg);
+			}
+			
+			if( statecounter<=10000 && pinkystateflag==0 && scaredflag==0 && pinkydeadflag==0){
+					pg.pinky.choice(1, 1, pg);
+					if(pg.pinky.currenttilex==1 && pg.pinky.currenttiley==1){
+						pinkystateflag=1;
+					}
+				
+			}
+			
+			if(statecounter<=10000 && pinkystateflag==1 && scaredflag==0 && pinkydeadflag==0){
+				pg.pinky.choice(6, 5, pg);
+				if(pg.pinky.currenttilex==6 && pg.pinky.currenttiley==5){
+					pinkystateflag=0;
+				}
+			}
+			//pg.pinky.choice2(mazex, mazey, pg);
 		}
+		
+		if(scaredflag==1 && pinkyflag==1 && pinkydeadflag==0){
+			if(pinkystateflag==0){
+				pg.pinky.choice(7, 14, pg);
+				if(pg.pinky.currenttilex==7 && pg.pinky.currenttiley==14){
+					pinkystateflag=1;
+				}
+			
+			}
+		
+			if(pinkystateflag==1){
+			pg.pinky.choice(19, 14, pg);
+				if(pg.pinky.currenttilex==19 && pg.pinky.currenttiley==14){
+					pinkystateflag=0;
+				}
+			}
+			
+		}
+		
+		if(pinkydeadflag==1){
+			pg.pinky.choice(14, 14, pg);
+			if(pg.pinky.currenttilex==14 && pg.pinky.currenttiley==14){
+				pinkydeadflag=0;
+			}
+		}
+		
 		
 		if(timer < 0){
 			pg.clyde.movefromhome(pg);
 			clydeflag=1;
 		}
 		
-		if(clydeflag==1){
-			pg.clyde.choice(mazex, mazey, pg);
+		if(clydeflag==1 && clydedeadflag==0){
+			if(statecounter>10000 && scaredflag==0){
+				pg.clyde.choice(mazex, mazey, pg);
+			}
+			
+			if( statecounter<=10000 && clydestateflag==0 && scaredflag==0 && clydedeadflag==0){
+					pg.clyde.choice(1, 29, pg);
+					if(pg.clyde.currenttilex==1 && pg.clyde.currenttiley==29){
+						clydestateflag=1;
+					}
+				
+			}
+			
+			if(statecounter<=10000 && clydestateflag==1 && scaredflag==0 && clydedeadflag==0){
+				pg.clyde.choice(8, 23, pg);
+				if(pg.clyde.currenttilex==8 && pg.clyde.currenttiley==23){
+					clydestateflag=0;
+				}
+			}
+			//pg.clyde.choice2(mazex, mazey, pg);
+		}
+		
+		if(scaredflag==1 && clydeflag==1 && clydedeadflag==0){
+			if(clydestateflag==0){
+				pg.clyde.choice(14, 5, pg);
+				if(pg.clyde.currenttilex==14 && pg.clyde.currenttiley==5){
+					clydestateflag=1;
+				}
+			
+			}
+		
+			if(clydestateflag==1){
+			pg.clyde.choice(14, 23, pg);
+				if(pg.clyde.currenttilex==14 && pg.clyde.currenttiley==23){
+					clydestateflag=0;
+				}
+			}
+			
+		}
+		
+		if(clydedeadflag==1){
+			pg.clyde.choice(14, 14, pg);
+			if(pg.clyde.currenttilex==14 && pg.clyde.currenttiley==14){
+				clydedeadflag=0;
+			}
 		}
 		
 		

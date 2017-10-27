@@ -62,6 +62,8 @@ public class PacManGame extends StateBasedGame {
 	public static final String lv2w_lv2w_RSC = "PacMan/resource/2ndlvlwin.png";
 	public static final String title_title_RSC = "PacMan/resource/title.png";
 	public static final String FISH_FISH_RSC = "PacMan/resource/coyfish.png";
+	public static final String GD_GD_RSC = "PacMan/resource/scared.png";
+	public static final String GDS_GDS_RSC = "PacMan/resource/ghostdeath.wav";
 	public String file = "highscore.txt";
 	
 	//public static final String 
@@ -164,9 +166,9 @@ public class PacManGame extends StateBasedGame {
 			{1,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,1},
 			{1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
 			{1,0,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,0,1},
-			{1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
-			{1,0,0,0,0,0,0,1,1,0,1,3,3,3,3,3,3,1,0,1,1,0,0,0,0,0,0,1},
-			{1,0,1,1,1,1,0,0,0,0,1,3,3,3,3,3,3,1,0,0,0,0,1,1,1,1,0,1},//midpoint
+			{1,0,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,1,0,1},
+			{1,0,0,0,0,0,0,1,1,0,1,3,3,3,0,3,3,1,0,1,1,0,0,0,0,0,0,1},
+			{1,0,1,1,1,1,0,0,0,0,1,3,3,3,0,3,3,1,0,0,0,0,1,1,1,1,0,1},//midpoint
 			{1,0,1,1,1,1,0,1,1,0,1,3,3,3,3,3,3,1,0,1,1,0,1,1,1,1,0,1},
 			{1,0,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1},
 			{1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
@@ -198,7 +200,7 @@ public class PacManGame extends StateBasedGame {
 			{1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,1,1,1,1,1,1},
-			{1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,1,1},
+			{1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,1,0,1,1,0,1,1,1,1,1,1},
 			{1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
 			{0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0},//midpoint
 			{1,1,1,1,1,1,0,1,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1,1,1,1,1,1},
@@ -318,6 +320,7 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadSound(Scared_Scared_RSC);
 		ResourceManager.loadSound(Siren_Siren_RSC);
 		ResourceManager.loadSound(Waka_Waka_RSC);
+		ResourceManager.loadSound(GDS_GDS_RSC);
 		ResourceManager.loadImage(ST_ST_RSC);
 		ResourceManager.loadImage(CH_CH_RSC);
 		ResourceManager.loadImage(PE_PE_RSC);
@@ -332,6 +335,7 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(lv2w_lv2w_RSC);
 		ResourceManager.loadImage(title_title_RSC);
 		ResourceManager.loadImage(FISH_FISH_RSC);
+		ResourceManager.loadImage(GD_GD_RSC);
 		
 		
 		//food=new dots[244];
@@ -357,37 +361,16 @@ public class PacManGame extends StateBasedGame {
 		//dot=new dots[241];
 		
 		
-		//read highscore
 		
-		for(int i=0;i<31;i++){
+		for(int v=0;v<31;v++){
 			for(int z=0;z<28;z++){
-				mazecopy[i][z]=maze[i][z];
-				maze2copy[i][z]=maze2[i][z];
+				mazecopy[v][z]=maze[v][z];
+				maze2copy[v][z]=maze2[v][z];
 			}
 		}
 
-        try {
-            FileReader filereader = new FileReader(file);
-
-            BufferedReader buffreader = new BufferedReader(filereader);
-
-            while((line = buffreader.readLine()) != null) {
-                scorearray[i]=line;
-                i++;
-            }   
-
-            // Always close files.
-            buffreader.close();         
-        }
-        catch(FileNotFoundException ex) {
-            System.out.println("Unable to open file");                
-        }
-        catch(IOException ex) {
-            System.out.println("Error reading file");                  
-        }
+        
     
-		
-		//end read highscore
 		
 		
 	

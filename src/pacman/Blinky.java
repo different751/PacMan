@@ -299,7 +299,7 @@ class Blinky extends Entity {
 	
 	private void move(PacManGame pg){
 		if(desired==3){
-			if(pg.maze[currenttiley][currenttilex-1]!=1){
+			if(pg.mazecando[currenttiley][currenttilex-1]!=1){
 				state=1;
 				nexttilex=currenttilex-1;
 				nexttiley=currenttiley;
@@ -316,7 +316,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==1){
-			if(pg.maze[currenttiley-1][currenttilex]!=1){
+			if(pg.mazecando[currenttiley-1][currenttilex]!=1){
 				state=3;
 				nexttilex=currenttilex;
 				nexttiley=currenttiley-1;
@@ -334,7 +334,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==2){
-			if(pg.maze[currenttiley+1][currenttilex]!=1){
+			if(pg.mazecando[currenttiley+1][currenttilex]!=1){
 				state=4;
 				nexttilex=currenttilex;
 				nexttiley=currenttiley+1;
@@ -351,7 +351,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==4){
-			if(pg.maze[currenttiley][currenttilex+1]!=1){
+			if(pg.mazecando[currenttiley][currenttilex+1]!=1){
 				state=2;
 				nexttilex=currenttilex+1;
 				nexttiley=currenttiley;
@@ -371,7 +371,7 @@ class Blinky extends Entity {
 	
 	private void move2(PacManGame pg){
 		if(desired==3){
-			if(pg.maze2[currenttiley][currenttilex-1]!=1){
+			if(pg.maze2cando[currenttiley][currenttilex-1]!=1){
 				state=1;
 				nexttilex=currenttilex-1;
 				nexttiley=currenttiley;
@@ -388,7 +388,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==1){
-			if(pg.maze2[currenttiley-1][currenttilex]!=1){
+			if(pg.maze2cando[currenttiley-1][currenttilex]!=1){
 				state=3;
 				nexttilex=currenttilex;
 				nexttiley=currenttiley-1;
@@ -406,7 +406,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==2){
-			if(pg.maze2[currenttiley+1][currenttilex]!=1){
+			if(pg.maze2cando[currenttiley+1][currenttilex]!=1){
 				state=4;
 				nexttilex=currenttilex;
 				nexttiley=currenttiley+1;
@@ -423,7 +423,7 @@ class Blinky extends Entity {
 		}
 		
 		if(desired==4){
-			if(pg.maze2[currenttiley][currenttilex+1]!=1){
+			if(pg.maze2cando[currenttiley][currenttilex+1]!=1){
 				state=2;
 				nexttilex=currenttilex+1;
 				nexttiley=currenttiley;
