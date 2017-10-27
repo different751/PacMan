@@ -21,8 +21,9 @@ __________COMPLETED__________
 **MRI 4** : fixed lives not resetting
 **MRI 5** : fixed score not reseting
 **MRI 6** : added ghost death sounds
+**25** : add life after 3000 score
 **21** : cheat codes
-
+**26** : adjust animations
 __________TO BE COMPLETED__________
 
 
@@ -31,14 +32,13 @@ __________TO BE COMPLETED__________
 
 18 : tweak player movement  
 
-22 : adjust animations
-25 : add life after 3000 score
+
 
 
 
 
 __________Minor Random Ideas_______
-MRI 1 : add score text after fruit eat
+
 MRI 3 : Need to fix bug when crossing ghost house causes death
 
 

@@ -45,6 +45,8 @@ class Menu extends BasicGameState {
 		ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
 		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
 		pg.lives=3;
+		pg.winstatelvl1=244;
+		pg.winstatelvl2=251;
 		pg.i=0;
 		for(int i=0;i<31;i++){
 			for(int z=0;z<28;z++){

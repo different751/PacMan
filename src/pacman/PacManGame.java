@@ -33,15 +33,19 @@ public class PacManGame extends StateBasedGame {
 	public static final String BL_BL_RSC = "PacMan/resource/blinkyleft.png";
 	public static final String BU_BU_RSC = "PacMan/resource/blinkyup.png";
 	public static final String BD_BD_RSC = "PacMan/resource/blinkydown.png";
+	public static final String BR_BR_RSC = "PacMan/resource/blinkyright.png";
 	public static final String IL_IL_RSC = "PacMan/resource/inkyleft.png";
 	public static final String IU_IU_RSC = "PacMan/resource/inkyup.png";
 	public static final String ID_ID_RSC = "PacMan/resource/inkydown.png";
+	public static final String IR_IR_RSC = "PacMan/resource/inkyright.png";
 	public static final String PL_PL_RSC = "PacMan/resource/pinkyleft.png";
 	public static final String PU_PU_RSC = "PacMan/resource/pinkyup.png";
 	public static final String PD_PD_RSC = "PacMan/resource/pinkydown.png";
+	public static final String PR_PR_RSC = "PacMan/resource/pinkyright.png";
 	public static final String CL_CL_RSC = "PacMan/resource/clydeleft.png";
 	public static final String CU_CU_RSC = "PacMan/resource/clydeup.png";
 	public static final String CD_CD_RSC = "PacMan/resource/clydedown.png";
+	public static final String CR_CR_RSC = "PacMan/resource/clyderight.png";
 	public static final String Death_Death_RSC = "PacMan/resource/death.wav";
 	public static final String Scared_Scared_RSC = "PacMan/resource/scared.wav";
 	public static final String Siren_Siren_RSC = "PacMan/resource/test1.wav";
@@ -62,8 +66,12 @@ public class PacManGame extends StateBasedGame {
 	public static final String lv2w_lv2w_RSC = "PacMan/resource/2ndlvlwin.png";
 	public static final String title_title_RSC = "PacMan/resource/title.png";
 	public static final String FISH_FISH_RSC = "PacMan/resource/coyfish.png";
-	public static final String GD_GD_RSC = "PacMan/resource/scared.png";
+	public static final String GS_GS_RSC = "PacMan/resource/scared.png";
+	public static final String GD_GD_RSC = "PacMan/resource/deadeyes.png";
 	public static final String GDS_GDS_RSC = "PacMan/resource/ghostdeath.wav";
+	public static final String PML_PML_RSC = "PacMan/resource/pacman_spritesheet1.png";
+	public static final String PMD_PMD_RSC = "PacMan/resource/pacman_spritesheet3.png";
+	public static final String PMU_PMU_RSC = "PacMan/resource/pacman_spritesheet2.png";
 	public String file = "highscore.txt";
 	
 	//public static final String 
@@ -239,6 +247,9 @@ public class PacManGame extends StateBasedGame {
 	
 	
 	
+	
+	int winstatelvl1=244;
+	int winstatelvl2=251;
 	float winx;
 	float winy;
 	int score=0;
@@ -308,13 +319,17 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(BL_BL_RSC);
 		ResourceManager.loadImage(BU_BU_RSC);
 		ResourceManager.loadImage(BD_BD_RSC);
+		ResourceManager.loadImage(BR_BR_RSC);
 		ResourceManager.loadImage(IL_IL_RSC);
+		ResourceManager.loadImage(IR_IR_RSC);
 		ResourceManager.loadImage(IU_IU_RSC);
 		ResourceManager.loadImage(ID_ID_RSC);
 		ResourceManager.loadImage(PL_PL_RSC);
+		ResourceManager.loadImage(PR_PR_RSC);
 		ResourceManager.loadImage(PU_PU_RSC);
 		ResourceManager.loadImage(PD_PD_RSC);
 		ResourceManager.loadImage(CL_CL_RSC);
+		ResourceManager.loadImage(CR_CR_RSC);
 		ResourceManager.loadImage(CU_CU_RSC);
 		ResourceManager.loadImage(CD_CD_RSC);
 		ResourceManager.loadSound(Death_Death_RSC);
@@ -336,6 +351,10 @@ public class PacManGame extends StateBasedGame {
 		ResourceManager.loadImage(lv2w_lv2w_RSC);
 		ResourceManager.loadImage(title_title_RSC);
 		ResourceManager.loadImage(FISH_FISH_RSC);
+		ResourceManager.loadImage(GS_GS_RSC);
+		ResourceManager.loadImage(PML_PML_RSC);
+		ResourceManager.loadImage(PMD_PMD_RSC);
+		ResourceManager.loadImage(PMU_PMU_RSC);
 		ResourceManager.loadImage(GD_GD_RSC);
 		
 		
