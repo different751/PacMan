@@ -101,6 +101,10 @@ public class level2 extends BasicGameState {
 		 currenttiley=25;
 		
 		container.setSoundOn(true);
+		ResourceManager.getSound(PacManGame.Waka_Waka_RSC).stop();
+		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).stop();
+		ResourceManager.getSound(PacManGame.Scared_Scared_RSC).stop();
+		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
 		ResourceManager.getSound(PacManGame.Death_Death_RSC).stop();
 		ResourceManager.getSound(PacManGame.Siren_Siren_RSC).loop();
 		 pg.pacman2.setX(232);
@@ -451,8 +455,13 @@ public class level2 extends BasicGameState {
 			this.move(desired);
 		}
 			
-			
 		}
+		
+		if (input.isKeyDown(Input.KEY_N))
+			game.enterState(PacManGame.LEVEL1, new EmptyTransition(), new HorizontalSplitTransition() );
+		
+		if(input.isKeyDown(Input.KEY_ESCAPE))
+			game.enterState(PacManGame.MENU, new EmptyTransition(), new HorizontalSplitTransition() );
 		
 		if(state==1){
 			
