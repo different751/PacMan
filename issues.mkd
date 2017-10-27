@@ -1,0 +1,42 @@
+__________COMPLETED__________
+**1** : Make git repo/starting files
+**2** : Make first few sprites for game
+**3** : make start state level window
+**11** : place dots
+**13** : first level/make player move
+**5** : Make AI move
+**9** : Music/Sound effects
+**15** : win state
+**12** : bonus fruit
+**22** : draw lives
+**10** : High Score system/game over state
+**14** : teleport pac man around map
+**8** : Second level
+**6** : Splash Screen
+**20** : title screen
+**23** : reset mazes at end game
+**24** : tweak AI movement
+**7** : ghost states
+**MRI 2** : reset I for high score
+**MRI 4** : fixed lives not resetting
+**MRI 5** : fixed score not reseting
+**MRI 6** : added ghost death sounds
+**25** : add life after 3000 score
+**21** : cheat codes
+**26** : adjust animations
+**18** : tweak player movement 
+__________TO BE COMPLETED__________
+
+
+
+__________Minor Random Ideas_______
+
+
+
+
+__________Optional Features_________
+OF 1 : different AI personalities
+OF 2 : add third level
+OF 3 : add fourth level
+OF 4 : intermission Cut scenes
+
