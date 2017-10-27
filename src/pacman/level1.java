@@ -67,7 +67,7 @@ public class level1 extends BasicGameState {
 	int fruit=0;
 	int secondcheck=-1;
 	int wrapflag=0;
-	int statecounter=30000;
+	int statecounter=40000;
 	int blinkystateflag=0;
 	int inkystateflag=0;
 	int pinkystateflag=0;
@@ -279,6 +279,8 @@ public class level1 extends BasicGameState {
 			pg.pinky.deadflag=0;
 			pg.clyde.deadflag=0;
 			pg.blinky.deadflag=0;
+			pg.previouskey=0;
+			pg.nextkey=0;
 		
 	}
 
@@ -458,48 +460,58 @@ public class level1 extends BasicGameState {
 	
 		if(state==0){
 			
-		//if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) || key==1)  ){
-		if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) )  ){
-			desired=1;
-			System.out.println("W");
-			this.move(desired);
-		}
-		else if(key==1){
-			this.move(desired);
-		}
-			
-			
+			if((input.isKeyPressed(Input.KEY_W) || input.isKeyPressed(Input.KEY_UP) || pg.nextkey==1)  ){
+				//desired=1;
+				//key=1;
+				pg.nextkey=1;
 		
-		if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN) ) ){
-			desired=2;
-			System.out.println("S");
-			this.move(desired);
-		}
-		else if(key==2){
-			this.move(desired);
-		}
-			
+				System.out.println("W");
+				this.move(1);
+			}
+			else if(key==1){
+				this.move(1);
+			}
 
-		
-		if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT) || key==3 )  ){
-			desired=3;
-			System.out.println("A");
-			this.move(desired);
+				
+				
 			
-		}
-		else if(key==3){
-			//System.out.println("A");
-			this.move(desired);
-		}
-		
-		if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)) ){
-			desired=4;
-			System.out.println("D");
-			this.move(desired);
-		}
-		else if(key==4){
-			this.move(desired);
-		}
+			if((input.isKeyPressed(Input.KEY_S) || input.isKeyPressed(Input.KEY_DOWN)|| pg.nextkey==2) ){
+				//desired=2;
+				//key=2;
+				pg.nextkey=2;
+				
+				System.out.println("S");
+				this.move(2);
+			}
+			else if(key==2){
+				this.move(2);
+			}
+			
+				
+
+			
+			if((input.isKeyPressed(Input.KEY_A) || input.isKeyPressed(Input.KEY_LEFT)||pg.nextkey==3)  ){
+				//desired=3;
+				//key=3;
+				pg.nextkey=3;
+				
+				System.out.println("A");
+				this.move(3);
+				
+			}
+			else if(key==3){
+				this.move(3);
+			}
+			
+			
+			if((input.isKeyPressed(Input.KEY_D) || input.isKeyPressed(Input.KEY_RIGHT)||pg.nextkey==4 ) ){
+				pg.nextkey=4;
+				System.out.println("D");
+				this.move(4);
+			}
+			else if(key==4){
+				this.move(4);
+			}
 			
 			
 		}
@@ -1033,6 +1045,7 @@ public class level1 extends BasicGameState {
 					pg.pacman.removeAnimation(pg.pacman.PacManAni);
 					pg.pacman.removeAnimation(pg.pacman.PacManUp);
 					pg.pacman.addAnimation(pg.pacman.PacManLeft);
+					pg.previouskey=key;
 					animationleftflag=1;
 				}
 				state=1;
@@ -1045,7 +1058,7 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			else if(current==3){
-				key=0;
+				//key=0;
 				return;
 			}
 			return;
@@ -1061,6 +1074,7 @@ public class level1 extends BasicGameState {
 					pg.pacman.removeAnimation(pg.pacman.PacManAni);
 					pg.pacman.removeAnimation(pg.pacman.PacManLeft);
 					pg.pacman.addAnimation(pg.pacman.PacManUp);
+					pg.previouskey=key;
 					animationupflag=1;
 				}
 				state=3;
@@ -1073,7 +1087,7 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			else if(current==1){
-				key=0;
+				//key=0;
 				return;
 			}
 			
@@ -1090,6 +1104,7 @@ public class level1 extends BasicGameState {
 					pg.pacman.removeAnimation(pg.pacman.PacManLeft);
 					pg.pacman.removeAnimation(pg.pacman.PacManAni);
 					pg.pacman.addAnimation(pg.pacman.PacManDown);
+					pg.previouskey=key;
 					animationdownflag=1;
 				}
 				state=4;
@@ -1102,7 +1117,7 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			else if(current==2){
-				key=0;
+				//key=0;
 				return;
 			}
 			return;
@@ -1125,6 +1140,7 @@ public class level1 extends BasicGameState {
 					pg.pacman.removeAnimation(pg.pacman.PacManUp);
 					pg.pacman.removeAnimation(pg.pacman.PacManDown);
 					pg.pacman.addAnimation(pg.pacman.PacManAni);
+					pg.previouskey=key;
 					animationrightflag=1;
 				}
 				state=2;
@@ -1137,7 +1153,7 @@ public class level1 extends BasicGameState {
 				return;
 			}
 			else if(current==4){
-				key=0;
+				//key=0;
 				return;
 			}
 			return;

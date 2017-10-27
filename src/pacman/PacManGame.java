@@ -249,6 +249,8 @@ public class PacManGame extends StateBasedGame {
 	
 	
 	int winstatelvl1=244;
+	int previouskey=0;
+	int nextkey=0;
 	int winstatelvl2=251;
 	float winx;
 	float winy;
